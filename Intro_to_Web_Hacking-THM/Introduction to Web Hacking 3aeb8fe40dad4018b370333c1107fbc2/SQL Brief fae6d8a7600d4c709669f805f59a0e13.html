@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>SQL Brief</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="fae6d8a7-600d-4c70-9669-f805f59a0e13" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://tryhackme-images.s3.amazonaws.com/room-icons/86d8d3b6995ddad46f5d9142354b65b1.png"/></div><h1 class="page-title">SQL Brief</h1></header><div class="page-body"><p id="2ad559a2-977c-4fa7-9c47-d85f6a3766ef" class=""><strong>SELECT</strong></p><p id="47351442-2daf-4cc6-9f1f-0abd5533ca59" class="">The first query type we&#x27;ll learn is the SELECT query used to retrieve data from the database.</p><p id="c6c6c9e3-3a1c-49bf-9792-ed2fea2ec8cb" class=""><code>select * from users;</code></p><table id="1b547b1b-6ab3-4fb6-b325-669323deaf2a" class="simple-table"><tbody><tr id="9d01d3bb-a608-4ebc-9efc-02b55eefab69"><td id="u?^[" class=""><strong>id</strong></td><td id="K&gt;Ug" class=""><strong>username</strong></td><td id="[c;O" class=""><strong>password</strong></td></tr><tr id="6a90c359-0987-4a6a-9c98-82e729aae429"><td id="u?^[" class="">1</td><td id="K&gt;Ug" class="">jon</td><td id="[c;O" class="">pass123</td></tr><tr id="73d47dc3-b427-4e4c-8157-62e8d6cfb629"><td id="u?^[" class="">2</td><td id="K&gt;Ug" class="">admin</td><td id="[c;O" class="">p4ssword</td></tr><tr id="1faa2cf9-0914-4353-bdf4-e91ecbe5c570"><td id="u?^[" class="">3</td><td id="K&gt;Ug" class="">martin</td><td id="[c;O" class="">secret123</td></tr></tbody></table><p id="df4468e6-1255-4514-ad5c-ef0102da3d50" class="">The next query is similar to the above, but this time, instead of using the * to return all columns in the database table, we are just requesting the username and password field.</p><p id="d76076b1-c4bf-418b-b013-2e64da188490" class=""><code>select username,password from users;</code></p><table id="09fb1001-844e-4674-901b-3d9fbf21741f" class="simple-table"><tbody><tr id="694c5e93-8865-4926-9137-8a96031307c6"><td id="RURi" class=""><strong>username</strong></td><td id="[d~b" class=""><strong>password</strong></td></tr><tr id="9a2a017e-c2b7-4b0d-9572-e76fbf32ab60"><td id="RURi" class="">jon</td><td id="[d~b" class="">pass123</td></tr><tr id="041ea7c7-34c1-4d10-8ee9-8eb12c483305"><td id="RURi" class="">admin</td><td id="[d~b" class="">p4ssword</td></tr><tr id="038a5a3f-e941-4fd8-aac7-fd9e4c10b501"><td id="RURi" class="">martin</td><td id="[d~b" class="">secret123</td></tr></tbody></table><p id="6e63489c-0972-4f0f-8b76-c216fd8950bd" class="">The following query, like the first, returns all the columns by using the * selector and then the &quot;LIMIT 1&quot; clause forces the database only to return one row of data. Changing the query to &quot;LIMIT 1,1&quot; forces the query to skip the first result, and then &quot;LIMIT 2,1&quot; skips the first two results, and so on. You need to remember the first number tells the database how many results you wish to skip, and the second number tells the database how many rows to return.</p><p id="7e88a57d-9dfa-49d6-9586-c9f691ab35e1" class=""><code>select * from users LIMIT 1;</code></p><table id="e3e9d2a8-7434-461e-bb73-7cf907274c4d" class="simple-table"><tbody><tr id="82c8610e-0abf-4b91-a5df-633c2958db50"><td id="T{n^" class=""><strong>id</strong></td><td id="`TYP" class=""><strong>username</strong></td><td id="kH@c" class=""><strong>password</strong></td></tr><tr id="543438ec-20ad-4e86-86e5-1211dd943fdb"><td id="T{n^" class="">1</td><td id="`TYP" class="">jon</td><td id="kH@c" class="">pass123</td></tr></tbody></table><p id="8f4f6ee5-086b-4cdd-aad5-ee252cacd3a1" class="">Lastly, we&#x27;re going to utilise the where clause; this is how we can finely pick out the exact data we require by returning data that matches our specific clauses:</p><p id="eb6e8802-968e-46b2-9f4a-31fd97e0a1d2" class=""><code>select * from users where username=&#x27;admin&#x27;;</code></p><table id="200b3aee-4e8d-42d6-9ff8-860273b5f89d" class="simple-table"><tbody><tr id="b78704bc-801d-4f9b-8901-48df385302df"><td id="`OO]" class=""><strong>id</strong></td><td id="~:e=" class=""><strong>username</strong></td><td id="g^yf" class=""><strong>password</strong></td></tr><tr id="8d2af633-36ce-4f76-ad46-c078b33350b6"><td id="`OO]" class="">2</td><td id="~:e=" class="">admin</td><td id="g^yf" class="">p4ssword</td></tr></tbody></table><p id="f66da3a7-5bab-4dbb-9b90-74623d80671c" class="">This will only return the rows where the username is equal to admin.</p><p id="48f1b1b3-4e93-4a80-a8e1-783ce1a43f72" class=""><code>select * from users where username != &#x27;admin&#x27;;</code></p><table id="af14362e-d9a6-4447-b12d-b6d70622afde" class="simple-table"><tbody><tr id="ca6c1fb3-b780-4d0a-9b4f-528bd18aee53"><td id="RaQ?" class=""><strong>id</strong></td><td id="bi;H" class=""><strong>username</strong></td><td id="fBwe" class=""><strong>password</strong></td></tr><tr id="024b40db-ebce-467f-85bf-b33ae3f6e0d3"><td id="RaQ?" class="">1</td><td id="bi;H" class="">jon</td><td id="fBwe" class="">pass123</td></tr><tr id="6d537cba-08e1-4f9e-af4d-4a86d5eb049d"><td id="RaQ?" class="">3</td><td id="bi;H" class="">martin</td><td id="fBwe" class="">secret123</td></tr></tbody></table><p id="1421c632-14d5-48be-b816-49dd990171ec" class="">This will only return the rows where the username is <strong>NOT</strong> equal to admin.</p><p id="2b589eb5-6b5e-4348-a374-ffd5b5a96162" class=""><code>select * from users where username=&#x27;admin&#x27; or username=&#x27;jon&#x27;;</code></p><table id="377c67e0-21b2-4fc6-b477-344ba1fd5c40" class="simple-table"><tbody><tr id="046af6ed-500a-4f9a-bf22-2b7fe376d9a2"><td id="c`U]" class=""><strong>id</strong></td><td id="ZMxk" class=""><strong>username</strong></td><td id=";S&lt;L" class=""><strong>password</strong></td></tr><tr id="7160f980-ec01-4023-81c6-062be8e3fdc4"><td id="c`U]" class="">1</td><td id="ZMxk" class="">jon</td><td id=";S&lt;L" class="">pass123</td></tr><tr id="4ef5888b-ee8b-481c-82b8-0a16bcf9ae54"><td id="c`U]" class="">2</td><td id="ZMxk" class="">admin</td><td id=";S&lt;L" class="">p4ssword</td></tr></tbody></table><p id="96229099-353d-4365-91fb-57a7bc0d299d" class="">This will only return the rows where the username is either equal to <strong>admin</strong> or j<strong>on</strong>.</p><p id="b16872c3-cde7-46dc-b70d-925fe70775b8" class=""><code>select * from users where username=&#x27;admin&#x27; and password=&#x27;p4ssword&#x27;;</code></p><table id="ab3c8f60-7278-426c-80a8-cf0ff2aaca07" class="simple-table"><tbody><tr id="1d8fb8a4-d28b-4fb4-9919-bc835f92ccb5"><td id="Qx{[" class=""><strong>id</strong></td><td id="`Imd" class=""><strong>username</strong></td><td id="eE`s" class=""><strong>password</strong></td></tr><tr id="3547e8af-8bb1-4621-8cb9-4216f8c85d6b"><td id="Qx{[" class="">2</td><td id="`Imd" class="">admin</td><td id="eE`s" class="">p4ssword</td></tr></tbody></table><p id="60d9badb-b68f-45fc-9f56-68d3a1b31a22" class="">This will only return the rows where the username is equal to <strong>admin</strong>, and the password is equal to <strong>p4ssword</strong>.</p><p id="469e6974-73c4-462e-8b6b-25d6df4f138c" class="">Using the like clause allows you to specify data that isn&#x27;t an exact match but instead either starts, contains or ends with certain characters by choosing where to place the wildcard character represented by a percentage sign %.</p><p id="f2c25b22-c57f-44e0-83f0-b4ec2293cc6b" class=""><code>select * from users where username like &#x27;a%&#x27;;</code></p><table id="b98c97a1-b638-4a1b-9009-c0082a2a6cc1" class="simple-table"><tbody><tr id="1de0db01-051e-4d07-bfb0-603ae4bd605a"><td id="MrqN" class=""><strong>id</strong></td><td id="|\ET" class=""><strong>username</strong></td><td id="~UiT" class=""><strong>password</strong></td></tr><tr id="aa64d143-f7d2-41a4-8e13-a9a4f8c10ab8"><td id="MrqN" class="">2</td><td id="|\ET" class="">admin</td><td id="~UiT" class="">p4ssword</td></tr></tbody></table><p id="6159a858-9d0b-4f78-bbbf-6530c8efb504" class="">This returns any rows with username beginning with the letter a.</p><p id="aa916197-4b87-4b94-b482-6829d627c4d4" class=""><code>select * from users where username like &#x27;%n&#x27;;</code></p><table id="d0b5b74d-8335-42fc-89c0-34a9c50fcda4" class="simple-table"><tbody><tr id="8301efe7-8e03-4a3a-ae18-1dfeead42cca"><td id="V\}e" class=""><strong>id</strong></td><td id="[oXP" class=""><strong>username</strong></td><td id="&gt;yZA" class=""><strong>password</strong></td></tr><tr id="af23a890-b27b-48b8-bb80-701f210ce646"><td id="V\}e" class="">1</td><td id="[oXP" class="">jon</td><td id="&gt;yZA" class="">pass123</td></tr><tr id="2f22b37f-3b8e-4eed-b53c-537fb2289868"><td id="V\}e" class="">2</td><td id="[oXP" class="">admin</td><td id="&gt;yZA" class="">p4ssword</td></tr><tr id="5b55a337-71db-412f-a9b4-5017d903e0d3"><td id="V\}e" class="">3</td><td id="[oXP" class="">martin</td><td id="&gt;yZA" class="">secret123</td></tr></tbody></table><p id="be27a811-dd29-4cd0-bc1d-9c7e7cc42db3" class="">This returns any rows with username ending with the letter n.</p><p id="d9389343-4d8b-4a09-884f-d1a08455a932" class=""><code>select * from users where username like &#x27;%mi%&#x27;;</code></p><table id="244b9a5b-addd-4bff-a8f5-69bb67ec7c90" class="simple-table"><tbody><tr id="081e95f8-c4c0-4c28-8c39-2cf31b1991ce"><td id="fL^^" class=""><strong>id</strong></td><td id="KgSt" class=""><strong>username</strong></td><td id="nAr{" class=""><strong>password</strong></td></tr><tr id="8a2f1516-efd4-45e5-9fe5-5ea2e1572f5a"><td id="fL^^" class="">2</td><td id="KgSt" class="">admin</td><td id="nAr{" class="">p4ssword</td></tr></tbody></table><p id="a9e5c024-7a6f-4215-bda6-457813bf52ef" class="">This returns any rows with a username containing the characters <strong>mi</strong> within them.</p><p id="fb6620ee-5a53-405b-864a-1c4626e41a97" class=""><strong>UNION</strong></p><p id="496cb668-ca56-4c98-82af-995fb9e8825f" class="">The UNION statement combines the results of two or more SELECT statements to retrieve data from either single or multiple tables; the rules to this query are that the UNION statement must retrieve the same number of columns in each SELECT statement, the columns have to be of a similar data type and the column order has to be the same. This might sound not very clear, so let&#x27;s use the following analogy. Say a company wants to create a list of addresses for all customers and suppliers to post a new catalogue. We have one table called customers with the following contents:</p><table id="bb9247aa-38ed-410a-a493-54c84c010816" class="simple-table"><tbody><tr id="02e84569-b889-47ae-ba83-8a4d43d873ac"><td id="[Ptj" class=""><strong>id</strong></td><td id="|&gt;}Y" class=""><strong>name</strong></td><td id="djL~" class=""><strong>address</strong></td><td id="v;EC" class=""><strong>city</strong></td><td id="q]_B" class=""><strong>postcode</strong></td></tr><tr id="c4ede04c-7a08-4624-9c3d-4aa957b2e94d"><td id="[Ptj" class="">1</td><td id="|&gt;}Y" class="">Mr John Smith</td><td id="djL~" class="">123 Fake Street</td><td id="v;EC" class="">Manchester</td><td id="q]_B" class="">M2 3FJ</td></tr><tr id="55218d95-9bca-4bc0-815e-3286e1361f3d"><td id="[Ptj" class="">2</td><td id="|&gt;}Y" class="">Mrs Jenny Palmer</td><td id="djL~" class="">99 Green Road</td><td id="v;EC" class="">Birmingham</td><td id="q]_B" class="">B2 4KL</td></tr><tr id="c014aa73-7e99-4a5b-a46c-c17d07222adb"><td id="[Ptj" class="">3</td><td id="|&gt;}Y" class="">Miss Sarah Lewis</td><td id="djL~" class="">15 Fore Street</td><td id="v;EC" class="">London</td><td id="q]_B" class="">NW12 3GH</td></tr></tbody></table><p id="f63b860f-9e36-4001-871b-e7a1b1f106ad" class="">And another called suppliers with the following contents:</p><table id="4d712eb2-9fd5-4be8-a367-10518a946f56" class="simple-table"><tbody><tr id="1c800aaf-6843-466d-b24c-b1378069aa02"><td id="J]|N" class="" style="width:43px"><strong>id</strong></td><td id="~gmr" class=""><strong>company</strong></td><td id="Uq[X" class="" style="width:209.7053680419922px"><strong>address</strong></td><td id="]mqf" class=""><strong>city</strong></td><td id="\H@C" class=""><strong>postcode</strong></td></tr><tr id="3b69b13d-2d75-48e5-976a-adcdc157f76b"><td id="J]|N" class="" style="width:43px">1</td><td id="~gmr" class="">Widgets Ltd</td><td id="Uq[X" class="" style="width:209.7053680419922px">Unit 1a, Newby Estate</td><td id="]mqf" class="">Bristol</td><td id="\H@C" class="">BS19 4RT</td></tr><tr id="9d1e5be3-f8dc-4061-9d6f-5a9c81f51842"><td id="J]|N" class="" style="width:43px">2</td><td id="~gmr" class="">The Tool Company</td><td id="Uq[X" class="" style="width:209.7053680419922px">75 Industrial Road</td><td id="]mqf" class="">Norwich</td><td id="\H@C" class="">N22 3DR</td></tr><tr id="e265c499-6415-4afc-8a50-a958090aba1b"><td id="J]|N" class="" style="width:43px">3</td><td id="~gmr" class="">Axe Makers Ltd</td><td id="Uq[X" class="" style="width:209.7053680419922px">2b Makers Unit, Market Road</td><td id="]mqf" class="">London</td><td id="\H@C" class="">SE9 1KK</td></tr></tbody></table><p id="56f2ce98-14cd-4d42-892a-c0652ccbdb89" class="">Using the following SQL Statement, we can gather the results from the two tables and put them into one result set:</p><p id="8f31199b-1ba0-45ca-9bc1-36bbea6b8562" class=""><code>SELECT name,address,city,postcode from customers UNION SELECT company,address,city,postcode from suppliers;</code></p><table id="ac705c35-cf6e-4a91-b4d5-3b1b4dd00bbf" class="simple-table"><tbody><tr id="9af8f44f-0f54-483f-b09f-d1d01fe1ea0b"><td id="OftZ" class=""><strong>name</strong></td><td id="oWh=" class=""><strong>address</strong></td><td id="X[y[" class=""><strong>city</strong></td><td id="kdfV" class=""><strong>postcode</strong></td></tr><tr id="eedc7fc5-8320-452a-9a96-3a97dafa581d"><td id="OftZ" class="">Mr John Smith</td><td id="oWh=" class="">123 Fake Street</td><td id="X[y[" class="">Manchester</td><td id="kdfV" class="">M2 3FJ</td></tr><tr id="a9b3f2c6-d9c0-4fce-bb14-3bde69f27072"><td id="OftZ" class="">Mrs Jenny Palmer</td><td id="oWh=" class="">99 Green Road</td><td id="X[y[" class="">Birmingham</td><td id="kdfV" class="">B2 4KL</td></tr><tr id="91238382-53ca-4171-9aac-ae05bb12e9e3"><td id="OftZ" class="">Miss Sarah Lewis</td><td id="oWh=" class="">15 Fore Street</td><td id="X[y[" class="">London</td><td id="kdfV" class="">NW12 3GH</td></tr><tr id="f59541dd-8352-4783-85df-1c2dd0f0ab5d"><td id="OftZ" class="">Widgets Ltd</td><td id="oWh=" class="">Unit 1a, Newby Estate</td><td id="X[y[" class="">Bristol</td><td id="kdfV" class="">BS19 4RT</td></tr><tr id="d19380cf-e58d-4ef2-bdca-0d4cff77d265"><td id="OftZ" class="">The Tool Company</td><td id="oWh=" class="">75 Industrial Road</td><td id="X[y[" class="">Norwich</td><td id="kdfV" class="">N22 3DR</td></tr><tr id="3f367fc3-55f0-49a5-9a66-43bb18fb4d54"><td id="OftZ" class="">Axe Makers Ltd</td><td id="oWh=" class="">2b Makers Unit, Market Road</td><td id="X[y[" class="">London</td><td id="kdfV" class="">SE9 1KK</td></tr></tbody></table><p id="599b64c9-4df1-4a58-941a-bba5a8718ab9" class="">INSERT</p><p id="8e0d769c-924f-42b5-99ef-db4c5037a4cb" class="">The <strong>INSERT</strong> statement tells the database we wish to insert a new row of data into the table. <strong>&quot;into users&quot;</strong> tells the database which table we wish to insert the data into, <strong>&quot;(username,password)&quot;</strong> provides the columns we are providing data for and then <strong>&quot;values (&#x27;bob&#x27;,&#x27;password&#x27;);&quot;</strong> provides the data for the previously specified columns.</p><p id="0a1d22c5-ce19-4224-b745-881051a2b80e" class=""><code>insert into users (username,password) values (&#x27;bob&#x27;,&#x27;password123&#x27;);</code></p><table id="cff8c718-55b0-4cdc-9bd2-cad19db04fd7" class="simple-table"><tbody><tr id="d4853823-d071-4dc9-bc2e-9353f25a446c"><td id="}s{v" class=""><strong>id</strong></td><td id="|^NJ" class=""><strong>username</strong></td><td id=";pUw" class=""><strong>password</strong></td></tr><tr id="0cf5ec96-0036-4c47-adcb-854864a9ce16"><td id="}s{v" class="">1</td><td id="|^NJ" class="">jon</td><td id=";pUw" class="">pass123</td></tr><tr id="023b6723-67c2-4010-97b2-d936243b3ea8"><td id="}s{v" class="">2</td><td id="|^NJ" class="">admin</td><td id=";pUw" class="">p4ssword</td></tr><tr id="ec9137c7-f12e-495b-af10-c11c63618c0c"><td id="}s{v" class="">3</td><td id="|^NJ" class="">martin</td><td id=";pUw" class="">secret123</td></tr><tr id="9f4975ae-8a80-44fe-8f0e-30ec271fe433"><td id="}s{v" class="">4</td><td id="|^NJ" class="">bob</td><td id=";pUw" class="">password123</td></tr></tbody></table><h2 id="7533d8b5-22ca-4048-b88e-909404aa4aca" class=""><strong>UPDATE</strong></h2><p id="2becdf90-8935-4502-953c-25dae39bda2e" class="">The <strong>UPDATE</strong> statement tells the database we wish to update one or more rows of data within a table. You specify the table you wish to update using &quot;<strong>update %tablename% SET</strong>&quot; and then select the field or fields you wish to update as a comma-separated list such as &quot;<strong>username=&#x27;root&#x27;,password=&#x27;pass123&#x27;</strong>&quot; then finally similar to the SELECT statement, you can specify exactly which rows to update using the where clause such as &quot;<strong>where username=&#x27;admin;</strong>&quot;.</p><p id="3fdabc9b-d26e-4798-8de0-fe6923c67b2a" class=""><code>update users SET username=&#x27;root&#x27;,password=&#x27;pass123&#x27; where username=&#x27;admin&#x27;;</code></p><table id="148b2662-ca3f-42b2-b52f-e2a91e1477fe" class="simple-table"><tbody><tr id="7c1bd459-3e97-4a5a-889c-2c6c7510294f"><td id="]S{P" class=""><strong>id</strong></td><td id="Qqtq" class=""><strong>username</strong></td><td id="a|@M" class=""><strong>password</strong></td></tr><tr id="0a815637-8f88-458c-9d1b-6f8c7b713431"><td id="]S{P" class="">1</td><td id="Qqtq" class="">jon</td><td id="a|@M" class="">pass123</td></tr><tr id="21e32da5-c901-47ea-8886-d4206df268bd"><td id="]S{P" class="">2</td><td id="Qqtq" class="">root</td><td id="a|@M" class="">pass123</td></tr><tr id="6e33f168-79ab-4cfd-846a-10dc75ded4ce"><td id="]S{P" class="">3</td><td id="Qqtq" class="">martin</td><td id="a|@M" class="">secret123</td></tr><tr id="08b6db9a-0674-4db5-b994-fc7f27c5ab0e"><td id="]S{P" class="">4</td><td id="Qqtq" class="">bob</td><td id="a|@M" class="">password123</td></tr></tbody></table><h2 id="584e3914-083c-45d7-b930-908ff3d23ebb" class=""><strong>DELETE</strong></h2><p id="95490895-a0cd-4b04-a2c6-4a56aaae3cdc" class="">The <strong>DELETE</strong> statement tells the database we wish to delete one or more rows of data. Apart from missing the columns you wish to be returned, the format of this query is very similar to the SELECT. You can specify precisely which data to delete using the <strong>where</strong> clause and the number of rows to be deleted using the <strong>LIMIT</strong> clause.</p><p id="f20cde91-0d54-4091-b411-fa8d946e88fa" class=""><code>delete from users where username=&#x27;martin&#x27;;</code></p><table id="659bc791-603e-4b00-9177-4afb12579ebf" class="simple-table"><tbody><tr id="7f636dcc-4775-4823-b71a-b7ef9a6b3de7"><td id="ewNe" class=""><strong>id</strong></td><td id="QiUf" class=""><strong>username</strong></td><td id="WfBo" class=""><strong>password</strong></td></tr><tr id="112809a4-0104-4294-bca2-3f0ebdbfa2c5"><td id="ewNe" class="">1</td><td id="QiUf" class="">jon</td><td id="WfBo" class="">pass123</td></tr><tr id="19f7e22c-bfe0-46c4-af0a-6a4c93df8c6d"><td id="ewNe" class="">2</td><td id="QiUf" class="">root</td><td id="WfBo" class="">pass123</td></tr><tr id="e2bb5269-3fc5-438c-9650-0857c1356b8e"><td id="ewNe" class="">4</td><td id="QiUf" class="">bob</td><td id="WfBo" class="">password123</td></tr></tbody></table><p id="a6c61c63-38b1-4cd7-be78-79e323dd6b04" class=""><code>delete from users;</code></p><p id="1876f66a-5233-4a1d-b703-d4450b17e6c3" class="">Because no WHERE clause was being used in the query, all the data is deleted in the table.</p><table id="c986caca-9ede-4665-ab6d-5197f97efe2c" class="simple-table"><tbody><tr id="5d14335f-1798-44f9-847d-4f80043f0a77"><td id="thoa" class=""><strong>id</strong></td><td id="lts=" class=""><strong>username</strong></td><td id="nwua" class=""><strong>password</strong></td></tr></tbody></table><p id="a6c01b03-91e6-4296-a66e-5384c6bcc959" class="">
+</p></div></article></body></html>
