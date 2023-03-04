@@ -1,0 +1,675 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Reconnaissance</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1cdadcce-b4e3-45fc-be97-02cbc2160c05" class="page sans"><header><img class="page-cover-image" src="https://assets.tryhackme.com/room-banners/netsecmodule.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="https://assets.tryhackme.com/img/modules/network-security.png"/></div><h1 class="page-title"><strong>Reconnaissance</strong></h1></header><div class="page-body"><h1 id="d70bdd88-2431-42cd-8bc7-9222e13c436d" class=""><em><mark class="highlight-yellow_background"><strong><strong>Passive Reconnaissance</strong></strong></mark></em></h1><p id="621aa54e-5f37-459c-9f63-718a5edde2a5" class="">Essential tools related to passive reconnaissance. Three command-line tools:</p><ul id="c7993940-6aaa-490b-8bfb-5578fb97818c" class="bulleted-list"><li style="list-style-type:disc"><strong><code>whois</code></strong><strong> </strong>to query WHOIS servers</li></ul><ul id="9b44d674-b7f0-439d-8b3d-0908ee82b7ce" class="bulleted-list"><li style="list-style-type:disc"><strong><code>nslookup</code></strong><strong> </strong>to query DNS servers</li></ul><ul id="82b0deaa-c36e-4392-96d5-a6bf79cd881f" class="bulleted-list"><li style="list-style-type:disc"><strong><code>dig</code></strong><strong> </strong>to query DNS servers</li></ul><p id="72e84d77-d691-42be-bef1-b6917bb876e6" class="">We use <code>whois</code> to query WHOIS records, while we use <code>nslookup</code> and <code>dig</code> to query DNS database records. These are all publicly available records and hence do not alert the target.</p><p id="e94257cc-3afa-4d83-931a-4bf245afaed1" class="">We will also learn the usage of two online services:</p><ul id="bc17b2c7-f470-4236-b12d-ba069b5383ba" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red"><a href="https://dnsdumpster.com/">DNSDumpster</a></mark></li></ul><ul id="db7a4e51-5ea3-408e-b1fc-346d264dccbe" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red"><a href="https://www.shodan.io/">Shodan.io</a></mark></li></ul><p id="7255a011-8e3a-4ba1-b467-ebd5d5dfed4d" class="">These two online services allow us to collect information about our target without directly connecting to it.</p><table id="311c60ab-de18-4cd1-bd1a-7570cc50f18d" class="simple-table"><tbody><tr id="61a712d7-2e58-48a1-a8a6-e22e025d564f"><td id="n&lt;vs" class="" style="width:279px">Purpose</td><td id="\X`y" class="" style="width:312px">Commandline Example</td></tr><tr id="dc60f0b3-850b-4f2b-a79d-a126b11ab379"><td id="n&lt;vs" class="" style="width:279px">Lookup WHOIS record</td><td id="\X`y" class="" style="width:312px"><code>whois tryhackme.com</code></td></tr><tr id="f749a193-27d8-4b5a-ad5c-5099448a5038"><td id="n&lt;vs" class="" style="width:279px">Lookup DNS A records</td><td id="\X`y" class="" style="width:312px"><code>nslookup -type=A tryhackme.com</code></td></tr><tr id="06e32dee-57e6-4f86-b18e-17fd73abd45e"><td id="n&lt;vs" class="" style="width:279px">Lookup DNS MX records at DNS server</td><td id="\X`y" class="" style="width:312px"><code>nslookup -type=MX tryhackme.com 1.1.1.1</code></td></tr><tr id="6ae35990-ea1c-4f0c-b5fc-40a12d25c700"><td id="n&lt;vs" class="" style="width:279px">Lookup DNS TXT records</td><td id="\X`y" class="" style="width:312px"><code>nslookup -type=TXT tryhackme.com</code></td></tr><tr id="f0a9353e-2b38-4df7-b80e-37a15c42ee90"><td id="n&lt;vs" class="" style="width:279px">Lookup DNS A records</td><td id="\X`y" class="" style="width:312px"><code>dig tryhackme.com A</code></td></tr><tr id="1ee9302c-ad96-4dbd-ad8a-0aafcd6f7c76"><td id="n&lt;vs" class="" style="width:279px">Lookup DNS MX records at DNS server</td><td id="\X`y" class="" style="width:312px"><code>dig @1.1.1.1 tryhackme.com MX</code></td></tr><tr id="5c8658aa-0295-4b33-8c0d-3830114b8ceb"><td id="n&lt;vs" class="" style="width:279px">Lookup DNS TXT records</td><td id="\X`y" class="" style="width:312px"><code>dig tryhackme.com TXT</code></td></tr></tbody></table><h1 id="8d18e797-2b52-4647-98aa-6cecb49fa9f5" class=""><em><mark class="highlight-yellow_background"><strong><strong>Active Reconnaissance</strong></strong></mark></em></h1><p id="865b7e7d-6070-4e61-aa5c-44ebd438d9c8" class=""><strong><code>ping</code></strong>, <strong><code>traceroute</code></strong>, and <strong><code>telnet</code></strong>. All these programs require connection to the target, and hence our activities would fall under active reconnaissance.</p><table id="02d38c2b-54ce-41da-ad62-f39c0bbd0f1d" class="simple-table"><tbody><tr id="a7d0f5b7-a6e6-410d-bb3c-318c328e70dd"><td id="e=]V" class="" style="width:208.99777221679688px">Command</td><td id="h\{_" class="" style="width:468px">Example</td></tr><tr id="5820371b-573e-4989-8d9a-0d55f15ec69a"><td id="e=]V" class="" style="width:208.99777221679688px">ping</td><td id="h\{_" class="" style="width:468px"><code>ping -c 10 MACHINE_IP</code> on Linux or macOS</td></tr><tr id="fb7247c9-4820-4a80-b654-a593975b8b1d"><td id="e=]V" class="" style="width:208.99777221679688px">ping</td><td id="h\{_" class="" style="width:468px"><code>ping -n 10 MACHINE_IP</code> on MS Windows</td></tr><tr id="77b99245-2f9f-4962-bb64-b21d79e2bd57"><td id="e=]V" class="" style="width:208.99777221679688px">traceroute</td><td id="h\{_" class="" style="width:468px"><code>traceroute MACHINE_IP</code> on Linux or macOS</td></tr><tr id="f7b11e0c-d9ea-4e9c-a024-211fa872e1d4"><td id="e=]V" class="" style="width:208.99777221679688px">tracert</td><td id="h\{_" class="" style="width:468px"><code>tracert MACHINE_IP</code> on MS Windows</td></tr><tr id="e0d03773-97d1-4948-b1bc-f3384379c704"><td id="e=]V" class="" style="width:208.99777221679688px">telnet</td><td id="h\{_" class="" style="width:468px"><code>telnet MACHINE_IP PORT_NUMBER</code></td></tr><tr id="a2ccd400-c39d-4af1-a9cc-9ed7af31eec9"><td id="e=]V" class="" style="width:208.99777221679688px">netcat as client</td><td id="h\{_" class="" style="width:468px"><code>nc MACHINE_IP PORT_NUMBER</code></td></tr><tr id="b520d175-7ffb-4fab-9cc8-0b504d1a8cc3"><td id="e=]V" class="" style="width:208.99777221679688px">netcat as server</td><td id="h\{_" class="" style="width:468px"><code>nc -lvnp PORT_NUMBER</code></td></tr></tbody></table><p id="2f79efad-80a7-485f-b025-30fa9571cf8d" class="">You can use <code>traceroute</code> to map the path to the target, <code>ping</code> to check if the target system responds to ICMP Echo, and <code>telnet</code> to check which ports are open and reachable by attempting to connect to them. Available scanners do this at much more advanced and sophisticated levels, like:</p><h1 id="f1c23bfb-9ab8-459f-a8f2-4bb93a9fa3d8" class=""><mark class="highlight-yellow_background"><span style="border-bottom:0.05em solid"><strong>NMAP</strong></span></mark></h1><p id="7c6c0d1c-5474-45ae-8593-535b9f7db81c" class=""><a href="https://www.notion.so/Nmap-b3bfcbd89ae64a0686867d8dc7b0fd9e"><img class="icon" src="https://play-lh.googleusercontent.com/xfEwmzQADrjODuFw94jDJpcUM2f15a9wKvzOExZ8hH7zvYaNpXUzH-fcbAp3RTrPs18"/>Nmap</a> <a href="https://www.notion.so/Nmap-b3bfcbd89ae64a0686867d8dc7b0fd9e"><img class="icon" src="https://play-lh.googleusercontent.com/xfEwmzQADrjODuFw94jDJpcUM2f15a9wKvzOExZ8hH7zvYaNpXUzH-fcbAp3RTrPs18"/>Nmap</a> <a href="https://www.notion.so/Nmap-b3bfcbd89ae64a0686867d8dc7b0fd9e"><img class="icon" src="https://play-lh.googleusercontent.com/xfEwmzQADrjODuFw94jDJpcUM2f15a9wKvzOExZ8hH7zvYaNpXUzH-fcbAp3RTrPs18"/>Nmap</a> <a href="https://www.notion.so/Nmap-b3bfcbd89ae64a0686867d8dc7b0fd9e"><img class="icon" src="https://play-lh.googleusercontent.com/xfEwmzQADrjODuFw94jDJpcUM2f15a9wKvzOExZ8hH7zvYaNpXUzH-fcbAp3RTrPs18"/>Nmap</a> <a href="https://www.notion.so/Nmap-b3bfcbd89ae64a0686867d8dc7b0fd9e"><img class="icon" src="https://play-lh.googleusercontent.com/xfEwmzQADrjODuFw94jDJpcUM2f15a9wKvzOExZ8hH7zvYaNpXUzH-fcbAp3RTrPs18"/>Nmap</a> <a href="https://www.notion.so/Nmap-b3bfcbd89ae64a0686867d8dc7b0fd9e"><img class="icon" src="https://play-lh.googleusercontent.com/xfEwmzQADrjODuFw94jDJpcUM2f15a9wKvzOExZ8hH7zvYaNpXUzH-fcbAp3RTrPs18"/>Nmap</a> <a href="https://www.notion.so/Nmap-b3bfcbd89ae64a0686867d8dc7b0fd9e"><img class="icon" src="https://play-lh.googleusercontent.com/xfEwmzQADrjODuFw94jDJpcUM2f15a9wKvzOExZ8hH7zvYaNpXUzH-fcbAp3RTrPs18"/>Nmap</a> <a href="https://www.notion.so/Nmap-b3bfcbd89ae64a0686867d8dc7b0fd9e"><img class="icon" src="https://play-lh.googleusercontent.com/xfEwmzQADrjODuFw94jDJpcUM2f15a9wKvzOExZ8hH7zvYaNpXUzH-fcbAp3RTrPs18"/>Nmap</a> <a href="https://www.notion.so/Nmap-b3bfcbd89ae64a0686867d8dc7b0fd9e"><img class="icon" src="https://play-lh.googleusercontent.com/xfEwmzQADrjODuFw94jDJpcUM2f15a9wKvzOExZ8hH7zvYaNpXUzH-fcbAp3RTrPs18"/>Nmap</a> </p><div><div id="07653c2e-8471-41be-a509-83fa23a0ca5d" class="column-list"><div id="49c0f022-4186-42e5-ac5e-781df7c969c7" style="width:50%" class="column"><h2 id="dd90de4b-4f43-4267-af66-a209a842f864" class=""><mark class="highlight-teal_background"><strong>Live Host Discovery</strong></mark></h2><p id="76143308-478f-490c-9625-d094ccadf238" class="">Different approaches that Nmap uses to discover live hosts:</p><ol type="1" id="ab58dfe0-fc83-42c4-b4fa-c9f7754d55e4" class="numbered-list" start="1"><li>ARP scan: This scan uses ARP requests to discover live hosts</li></ol><ol type="1" id="393e6753-c537-458c-85f8-df2971cbef4e" class="numbered-list" start="2"><li>ICMP scan: This scan uses ICMP requests to identify live hosts</li></ol><ol type="1" id="39f609ee-f3e5-4693-8dbc-d7df4eaf44f4" class="numbered-list" start="3"><li>TCP/UDP ping scan: This scan sends packets to TCP ports and UDP ports to determine live hosts.</li></ol><p id="a257c7f4-25de-41c0-8308-7b81e7208c98" class="">Other Two scanners, we can use: </p><ol type="1" id="6f8e4f09-c5ec-4ed1-aca0-9f5f3f7beed3" class="numbered-list" start="1"><li><code>arp-scan</code> for ARP scanning.</li></ol><ol type="1" id="10f4b114-8624-4e7e-b73d-32ff2e5e0354" class="numbered-list" start="2"><li><code>masscan</code> An fast scanner for the Internet.</li></ol></div><div id="b970383c-f782-43e5-b72e-4418e0147a5f" style="width:50%" class="column"><figure id="7f7c7188-1f30-48ed-9adb-700f364d9293" class="image" style="text-align:right"><a href="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/f1b4ede255e008646e425038d709c9b6.png"><img style="width:336px" src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/f1b4ede255e008646e425038d709c9b6.png"/></a></figure></div></div><p id="5d55a4f3-159e-4234-838a-fce9078886f4" class="">Generally speaking, you can provide a list, a range, or a subnet. Examples of target specification are:</p><ul id="7b35186c-cfc0-4c19-be8c-cae65b4648d4" class="bulleted-list"><li style="list-style-type:disc">list: <code>MACHINE_IP scanme.nmap.org example.com</code> will scan 3 IP addresses.</li></ul><ul id="cf6e8e71-798d-470f-a5b3-084a4e778d8f" class="bulleted-list"><li style="list-style-type:disc">range: <code>10.11.12.15-20</code> will scan 6 IP addresses: <code>10.11.12.15</code>, <code>10.11.12.16</code>,… and <code>10.11.12.20</code>.</li></ul><ul id="74ecddbf-ec4a-4783-92c0-c316a7947650" class="bulleted-list"><li style="list-style-type:disc">subnet: <code>MACHINE_IP/30</code> will scan 4 IP addresses.</li></ul><p id="8377fbce-2fec-4fda-802a-ffc68bc0aaa3" class="">You can also provide a file as input for your list of targets, <code>nmap -iL list_of_hosts.txt</code>.</p><p id="6297c3e8-10b3-449c-bbe0-aa628d9ee6cd" class="">If you want to check the list of hosts that Nmap will scan, you can use <code>nmap -sL TARGETS</code>.</p><h3 id="f7206005-8946-4695-94ee-fed6c3c0abb5" class=""><strong><strong>Live Host Discovery</strong></strong></h3><table id="aac2d2ea-0dc0-4fe7-b03d-884dbb5ea4f7" class="simple-table"><tbody><tr id="5179cb1d-b4e0-4294-8c3b-360b28314212"><td id="s@O?" class="" style="width:218.41964721679688px">Scan Type</td><td id="cOOb" class="" style="width:301px">Example Command</td></tr><tr id="de852be5-ba13-4c36-b01a-49fb3ad2146b"><td id="s@O?" class="" style="width:218.41964721679688px">ARP Scan</td><td id="cOOb" class="" style="width:301px"><code>sudo nmap -PR -sn MACHINE_IP/24</code></td></tr><tr id="17ab7a6b-0734-45e0-a6e0-30dd0b30df40"><td id="s@O?" class="" style="width:218.41964721679688px">ICMP Echo Scan</td><td id="cOOb" class="" style="width:301px"><code>sudo nmap -PE -sn MACHINE_IP/24</code></td></tr><tr id="ba1be78a-8f3f-4eb0-bf19-5cc2476ea8c3"><td id="s@O?" class="" style="width:218.41964721679688px">ICMP Timestamp Scan</td><td id="cOOb" class="" style="width:301px"><code>sudo nmap -PP -sn MACHINE_IP/24</code></td></tr><tr id="7b65182a-71b1-48d1-af6b-72047a60097c"><td id="s@O?" class="" style="width:218.41964721679688px">ICMP Address Mask Scan</td><td id="cOOb" class="" style="width:301px"><code>sudo nmap -PM -sn MACHINE_IP/24</code></td></tr><tr id="a481a852-90ea-44f4-b733-91838d510be1"><td id="s@O?" class="" style="width:218.41964721679688px">TCP SYN Ping Scan</td><td id="cOOb" class="" style="width:301px"><code>sudo nmap -PS22,80,443 -sn MACHINE_IP/30</code></td></tr><tr id="f4ea6087-404d-4150-9cb8-404b4c68ad38"><td id="s@O?" class="" style="width:218.41964721679688px">TCP ACK Ping Scan</td><td id="cOOb" class="" style="width:301px"><code>sudo nmap -PA22,80,443 -sn MACHINE_IP/30</code></td></tr><tr id="bde440a3-e5be-489c-bb0a-62a224427f1b"><td id="s@O?" class="" style="width:218.41964721679688px">UDP Ping Scan</td><td id="cOOb" class="" style="width:301px"><code>sudo nmap -PU53,161,162 -sn MACHINE_IP/30</code></td></tr></tbody></table><p id="6cd2f256-5ca1-4e95-896f-921d18784da8" class="">Remember to add <code>-sn</code> if you are only interested in host discovery without port-scanning. Omitting <code>-sn</code> will let Nmap default to port-scanning the live hosts.</p><table id="37975de3-62e5-4511-b7a8-e712b354c5e0" class="simple-table"><tbody><tr id="596b90ba-8bff-41a8-8131-8d0e43db1980"><td id="IqSt" class="">Option</td><td id="~fWj" class="">Purpose</td></tr><tr id="452ab597-fa96-43b7-a082-448da550627c"><td id="IqSt" class=""><code>-n</code></td><td id="~fWj" class="">no DNS lookup</td></tr><tr id="e20927a9-c99d-4df8-9518-6683c10c4e78"><td id="IqSt" class=""><code>-R</code></td><td id="~fWj" class="">reverse-DNS lookup for all hosts</td></tr><tr id="633ddcd4-5a38-4c8f-a3f4-088b51623e5a"><td id="IqSt" class=""><code>-sn</code></td><td id="~fWj" class="">host discovery only</td></tr></tbody></table><hr id="1df89e78-4ac3-4cae-aa28-5ae1effa8a1e"/><h2 id="17b62134-5ffa-47ae-8bed-2040ce5bc900" class=""><mark class="highlight-teal_background"><strong><strong>Basic Port Scans</strong></strong></mark></h2><p id="4c472185-2cb0-4a3b-bdde-2cbc2725cdaa" class="">we need to consider the impact of firewalls. For instance, a port might be open, but a firewall might be blocking the packets. Therefore, Nmap considers the following six states:</p><ol type="1" id="c6142b4b-4ec5-4417-9831-64fed60da352" class="numbered-list" start="1"><li><strong>Open</strong>: indicates that a service is listening on the specified port.</li></ol><ol type="1" id="87d26b2a-6cd7-41e3-9356-7138016a57bf" class="numbered-list" start="2"><li><strong>Closed</strong>: indicates that no service is listening on the specified port, although the port is accessible. By accessible, we mean that it is reachable and is not blocked by a firewall or other security appliances/programs.</li></ol><ol type="1" id="647ac70d-8757-4490-835f-922a5065d7ea" class="numbered-list" start="3"><li><strong>Filtered</strong>: means that Nmap cannot determine if the port is open or closed because the port is not accessible. This state is usually due to a firewall preventing Nmap from reaching that port. Nmap’s packets may be blocked from reaching the port; alternatively, the responses are blocked from reaching Nmap’s host.</li></ol><ol type="1" id="10044795-8d85-40bf-9678-3de1866bfed8" class="numbered-list" start="4"><li><strong>Unfiltered</strong>: means that Nmap cannot determine if the port is open or closed, although the port is accessible. This state is encountered when using an ACK scan <code>sA</code>.</li></ol><ol type="1" id="c543b2ea-7f02-41af-a00a-f3ef73e70a31" class="numbered-list" start="5"><li><strong>Open|Filtered</strong>: This means that Nmap cannot determine whether the port is open or filtered.</li></ol><ol type="1" id="fc8009f8-74c6-4e69-a673-af4b7b009bf4" class="numbered-list" start="6"><li><strong>Closed|Filtered</strong>: This means that Nmap cannot decide whether a port is closed or filtered.</li></ol><table id="803b9124-96e3-4a31-815c-008947f6c985" class="simple-table"><tbody><tr id="dcd9b9bb-5cbf-4012-8214-9ef4fa4d2db7"><td id="h;BD" class="">Port Scan Type</td><td id="mqkk" class="">Example Command</td></tr><tr id="cbb111d0-f725-420c-8a9d-ba521a00f82f"><td id="h;BD" class="">TCP Connect Scan</td><td id="mqkk" class=""><code>nmap -sT 10.10.4.107</code></td></tr><tr id="0736d2ea-585f-4ddc-9972-a9a7ba5d04ee"><td id="h;BD" class="">TCP SYN Scan</td><td id="mqkk" class=""><code>sudo nmap -sS 10.10.4.107</code></td></tr><tr id="be84ccd2-d250-4a93-af9d-c4ef7593d60f"><td id="h;BD" class="">UDP Scan</td><td id="mqkk" class=""><code>sudo nmap -sU 10.10.4.107</code></td></tr></tbody></table><p id="8c52f8da-5e7d-4a19-8972-774310d1373e" class="">These scan types should get you started discovering running TCP and UDP services on a target host.</p><table id="c203c272-e9ca-4240-9f48-da0d85abba5a" class="simple-table"><tbody><tr id="acea0497-54ee-4d3d-b7de-507e6c7a988b"><td id="Tlr{" class="">Option</td><td id="JlfP" class="" style="width:290px">Purpose</td></tr><tr id="a9d4d05c-494b-47c4-bdec-e08929126e6e"><td id="Tlr{" class=""><code>-p-</code></td><td id="JlfP" class="" style="width:290px">all ports</td></tr><tr id="cb65bb5f-9a2d-4445-acf9-67b6c1b9efb1"><td id="Tlr{" class=""><code>-p1-1023</code></td><td id="JlfP" class="" style="width:290px">scan ports 1 to 1023</td></tr><tr id="5d00fed6-a869-4641-81fc-953a710b7a34"><td id="Tlr{" class=""><code>-F</code></td><td id="JlfP" class="" style="width:290px">100 most common ports</td></tr><tr id="f5eff309-accb-45eb-93b1-d156f404f0b8"><td id="Tlr{" class=""><code>-r</code></td><td id="JlfP" class="" style="width:290px">scan ports in consecutive order</td></tr><tr id="7e28276b-68b3-4f43-9f90-1c248f4af412"><td id="Tlr{" class=""><code>-T&lt;0-5&gt;</code></td><td id="JlfP" class="" style="width:290px">-T0 being the slowest and T5 the fastest</td></tr><tr id="bb100a87-ae96-465a-906f-00c9fa9edbd5"><td id="Tlr{" class=""><code>--max-rate 50</code></td><td id="JlfP" class="" style="width:290px">rate &lt;= 50 packets/sec</td></tr><tr id="29b57260-3774-4f92-bbe0-07b7bf067a62"><td id="Tlr{" class=""><code>--min-rate 15</code></td><td id="JlfP" class="" style="width:290px">rate &gt;= 15 packets/sec</td></tr><tr id="55a7857d-364a-4fd2-bba2-08f213c6745c"><td id="Tlr{" class=""><code>--min-parallelism 100</code></td><td id="JlfP" class="" style="width:290px">at least 100 probes in parallel</td></tr></tbody></table><hr id="d3b59388-a715-4861-adc2-04e2cda971e8"/><h2 id="4b625ec7-b90f-4a07-9b79-f11bb32c68bf" class=""><mark class="highlight-teal_background"><strong><strong>Advanced Port Scans</strong></strong></mark></h2><table id="686dd6c6-828c-43d9-8c40-95bffa5bb379" class="simple-table"><tbody><tr id="fcc8f49f-c215-469c-b179-6060a36b44ab"><td id="Q]tO" class="">Port Scan Type</td><td id="MWNs" class="" style="width:404px">Example Command</td></tr><tr id="f4c8fd5f-e89d-4c72-aac5-c7d00a5de935"><td id="Q]tO" class="">TCP Null Scan</td><td id="MWNs" class="" style="width:404px"><code>sudo nmap -sN 10.10.49.251</code></td></tr><tr id="b98d4869-3574-413e-a63d-ff85e2eb9889"><td id="Q]tO" class="">TCP FIN Scan</td><td id="MWNs" class="" style="width:404px"><code>sudo nmap -sF 10.10.49.251</code></td></tr><tr id="9e3f0108-c810-4fe8-8e3c-39414f679c7e"><td id="Q]tO" class="">TCP Xmas Scan</td><td id="MWNs" class="" style="width:404px"><code>sudo nmap -sX 10.10.49.251</code></td></tr><tr id="22c811a3-1826-4ee8-85cd-d97a81e2fb3b"><td id="Q]tO" class="">TCP Maimon Scan</td><td id="MWNs" class="" style="width:404px"><code>sudo nmap -sM 10.10.49.251</code></td></tr><tr id="5c2a134c-8565-4132-aed0-cbae586a8d39"><td id="Q]tO" class="">TCP ACK Scan</td><td id="MWNs" class="" style="width:404px"><code>sudo nmap -sA 10.10.49.251</code></td></tr><tr id="9853bfcf-f983-425a-8db9-332a2b70497a"><td id="Q]tO" class="">TCP Window Scan</td><td id="MWNs" class="" style="width:404px"><code>sudo nmap -sW 10.10.49.251</code></td></tr><tr id="7e90ad37-fd7e-4684-8ff8-1ca5906ed9a2"><td id="Q]tO" class="">Custom TCP Scan</td><td id="MWNs" class="" style="width:404px"><code>sudo nmap --scanflags </code><mark class="highlight-brown"><strong><code>URG</code></strong></mark><mark class="highlight-purple"><strong><code>ACK</code></strong></mark><mark class="highlight-gray"><strong><code>PSH</code></strong></mark><mark class="highlight-teal"><strong><code>RST</code></strong></mark><mark class="highlight-pink"><strong><code>SYN</code></strong></mark><mark class="highlight-blue"><strong><code>FIN</code></strong></mark><code> 10.10.49.251</code></td></tr><tr id="04f94e6d-b4a8-4112-92e4-d1739165114a"><td id="Q]tO" class="">Spoofed Source IP</td><td id="MWNs" class="" style="width:404px"><code>sudo nmap -S SPOOFED_IP 10.10.49.251</code></td></tr><tr id="5ac6e98a-d7fc-4813-af58-49d3da0a7730"><td id="Q]tO" class="">Spoofed MAC Address</td><td id="MWNs" class="" style="width:404px"><code>--spoof-mac SPOOFED_MAC</code></td></tr><tr id="44825eba-b111-4c40-bf78-2fc853c0c1d6"><td id="Q]tO" class="">Decoy Scan</td><td id="MWNs" class="" style="width:404px"><code>nmap -D DECOY_IP,DECOY_IP,RND,ME 10.10.49.251</code></td></tr><tr id="dbc76d5b-c1bd-4d27-9f9b-b2d273788fc3"><td id="Q]tO" class="">Idle (Zombie) Scan</td><td id="MWNs" class="" style="width:404px"><code>sudo nmap -sI ZOMBIE_IP 10.10.49.251</code></td></tr><tr id="91bbdb1f-97e2-41ff-a1df-c2c52cc06579"><td id="Q]tO" class="">Fragment IP data into 8 bytes</td><td id="MWNs" class="" style="width:404px"><code>-f</code></td></tr><tr id="463c3c9c-0c03-488c-a5cc-b1ad7ccfacc3"><td id="Q]tO" class="">Fragment IP data into 16 bytes</td><td id="MWNs" class="" style="width:404px"><code>-ff</code></td></tr></tbody></table><table id="76822bf0-4953-4f74-8970-78e36fa0cfea" class="simple-table"><tbody><tr id="a9e1af22-a208-4a53-9e59-17b28fbc4835"><td id="X&lt;C=" class="">Option</td><td id="K&lt;xx" class="" style="width:301px">Purpose</td></tr><tr id="9fa51127-0db5-41f1-a3d2-8fa4512487ef"><td id="X&lt;C=" class=""><code>--source-port PORT_NUM</code></td><td id="K&lt;xx" class="" style="width:301px">specify source port number</td></tr><tr id="45c81917-f767-4b38-8e68-a20d0983c3e7"><td id="X&lt;C=" class=""><code>--data-length NUM</code></td><td id="K&lt;xx" class="" style="width:301px">append random data to reach given length</td></tr><tr id="48de2363-0c33-4f6f-9b9b-ba716bcb8f9d"><td id="X&lt;C=" class=""><code>--mtu</code></td><td id="K&lt;xx" class="" style="width:301px">You can change the fragment packets value.</td></tr></tbody></table><p id="474546f5-c68b-465e-bc9c-f31916a05375" class="">These scan types rely on setting TCP flags in unexpected ways to prompt ports for a reply. Null, FIN, and Xmas scan provoke a response from closed ports, while Maimon, ACK, and Window scans provoke a response from open and closed ports.</p><table id="f6432de1-99bf-48f6-95f7-75c62a9efdaf" class="simple-table"><tbody><tr id="aed632c2-4f9d-408c-bddd-d75398b7beeb"><td id="FM_P" class="">Option</td><td id="WP^C" class="">Purpose</td></tr><tr id="e33251f7-1efa-4974-839a-8fdc06ddb712"><td id="FM_P" class=""><code>--reason</code></td><td id="WP^C" class="">explains how Nmap made its conclusion</td></tr><tr id="ebcb5c47-837c-4082-afa4-500dc822d509"><td id="FM_P" class=""><code>-v</code></td><td id="WP^C" class="">verbose</td></tr><tr id="c2d1dda7-5690-4258-b708-d198f5288ed6"><td id="FM_P" class=""><code>-vv</code></td><td id="WP^C" class="">very verbose</td></tr><tr id="8d030724-ce4b-42e3-9437-6f4fbb8d32d6"><td id="FM_P" class=""><code>-d</code></td><td id="WP^C" class="">debugging</td></tr><tr id="095d7b9c-ab44-4590-832b-b510f4078443"><td id="FM_P" class=""><code>-dd</code></td><td id="WP^C" class="">more details for debugging</td></tr></tbody></table><hr id="8aa4c441-d9a9-4415-8bec-9352071ec9c5"/><h2 id="3ab9d17d-fb71-4e84-993f-594c4625d87a" class=""><mark class="highlight-teal_background"><strong><strong>Post Port Scans</strong></strong></mark></h2><p id="d6ac7f1d-6c45-40a9-835e-8c61a0edb5a8" class="">
+</p><table id="4088aff8-64c3-4aec-ba5d-ec5b482795ad" class="simple-table"><tbody><tr id="32becf34-e425-4224-b9f2-bf84b6942d9a"><td id="qsLa" class="" style="width:196.51339721679688px">Option</td><td id="\SKI" class="" style="width:465.982177734375px">Meaning</td></tr><tr id="ac1670f3-c901-489e-9d08-1d2b924f2c3d"><td id="qsLa" class="" style="width:196.51339721679688px"><code>-sV</code></td><td id="\SKI" class="" style="width:465.982177734375px">determine service/version info on open ports</td></tr><tr id="7f52592f-a866-47a4-823c-aea7035b78c6"><td id="qsLa" class="" style="width:196.51339721679688px"><code>-sV --version-light</code></td><td id="\SKI" class="" style="width:465.982177734375px">try the most likely probes (2)</td></tr><tr id="fe9c8a25-5b08-471e-bfa5-7c8592d6a353"><td id="qsLa" class="" style="width:196.51339721679688px"><code>-sV --version-all</code></td><td id="\SKI" class="" style="width:465.982177734375px">try all available probes (9)</td></tr><tr id="c21640d5-5a52-44b3-94aa-0f05ea6c8e03"><td id="qsLa" class="" style="width:196.51339721679688px"><code>-version-intensity LEVEL</code></td><td id="\SKI" class="" style="width:465.982177734375px">level ranges between 0, and 9</td></tr><tr id="c6982d40-4fbc-4757-a895-b01defdd7cda"><td id="qsLa" class="" style="width:196.51339721679688px"><code>-O</code></td><td id="\SKI" class="" style="width:465.982177734375px">detect OS</td></tr><tr id="74b691a3-7651-4a7a-9303-536546b36b41"><td id="qsLa" class="" style="width:196.51339721679688px"><code>-T2</code></td><td id="\SKI" class="" style="width:465.982177734375px">giving Nmap more time, we use it with <code>-O</code> when Nmap can’t detect the Operation System.</td></tr><tr id="684f4704-e22d-4e5b-a803-6c4a8d10da6e"><td id="qsLa" class="" style="width:196.51339721679688px"><code>--traceroute</code></td><td id="\SKI" class="" style="width:465.982177734375px">run traceroute to target</td></tr><tr id="11f7d1ad-4c56-4a60-8cdf-d613261c856d"><td id="qsLa" class="" style="width:196.51339721679688px"><code>--script=SCRIPTS</code></td><td id="\SKI" class="" style="width:465.982177734375px">Nmap scripts to run</td></tr><tr id="277864bc-c151-40f5-a1c4-3712731f26cf"><td id="qsLa" class="" style="width:196.51339721679688px"><code>-sC</code> or <code>--script=default</code></td><td id="\SKI" class="" style="width:465.982177734375px">run default scripts</td></tr><tr id="7cbf5134-cf2c-44e0-931b-7404a279c2be"><td id="qsLa" class="" style="width:196.51339721679688px"><code>-A</code></td><td id="\SKI" class="" style="width:465.982177734375px">equivalent to <code>-sV -O -sC --traceroute</code></td></tr><tr id="dcb4093b-2434-4d95-bb9d-f82c6eaf237d"><td id="qsLa" class="" style="width:196.51339721679688px"><code>-oN</code></td><td id="\SKI" class="" style="width:465.982177734375px">save output in normal format</td></tr><tr id="b65356e9-1adb-448a-b298-c19f37cf5d36"><td id="qsLa" class="" style="width:196.51339721679688px"><code>-oG</code></td><td id="\SKI" class="" style="width:465.982177734375px">save output in grepable format</td></tr><tr id="8386deba-a8d4-45b0-b8f2-e019dd80d259"><td id="qsLa" class="" style="width:196.51339721679688px"><code>-oX</code></td><td id="\SKI" class="" style="width:465.982177734375px">save output in XML format</td></tr><tr id="b96dcc0d-94f1-49b2-bf67-11d2294e97f2"><td id="qsLa" class="" style="width:196.51339721679688px"><code>-oA</code></td><td id="\SKI" class="" style="width:465.982177734375px">save output in normal, XML and Grepable formats</td></tr></tbody></table></div><hr id="3239f737-6a72-4114-8890-9023e4b021d9"/><h1 id="b412196f-da1d-48ec-9d18-6f12a19aabc9" class=""><em><mark class="highlight-yellow_background"><strong><strong>Protocols and Servers</strong></strong></mark></em></h1><table id="9a20ddf3-7f75-4302-9d30-828c13afd866" class="simple-table"><tbody><tr id="a9ca72ab-2e4d-40f0-bf1b-1335f9a4a8ca"><td id="`:@g" class="">Protocol</td><td id="ireQ" class="">TCP Port</td><td id="w&lt;WP" class="">Application(s)</td><td id="HNuU" class="">Data Security</td></tr><tr id="c1136bdf-fa1d-4219-8c52-89a78a26559f"><td id="`:@g" class="">FTP</td><td id="ireQ" class="">21</td><td id="w&lt;WP" class="">File Transfer</td><td id="HNuU" class="">Cleartext</td></tr><tr id="bd2051a3-c01d-4b96-8e83-2ca06da901b6"><td id="`:@g" class="">FTPS</td><td id="ireQ" class="">990</td><td id="w&lt;WP" class="">File Transfer</td><td id="HNuU" class="">Encrypted</td></tr><tr id="e9a72b89-a0c3-4577-a1fe-127a0b6c2f30"><td id="`:@g" class="">HTTP</td><td id="ireQ" class="">80</td><td id="w&lt;WP" class="">Worldwide Web</td><td id="HNuU" class="">Cleartext</td></tr><tr id="51fa6237-64f2-496d-9552-85b88e23bcd1"><td id="`:@g" class="">HTTPS</td><td id="ireQ" class="">443</td><td id="w&lt;WP" class="">Worldwide Web</td><td id="HNuU" class="">Encrypted</td></tr><tr id="b37c2c6d-a3a4-439a-b1f9-e1b222bb7204"><td id="`:@g" class="">IMAP</td><td id="ireQ" class="">143</td><td id="w&lt;WP" class="">Email (MDA)</td><td id="HNuU" class="">Cleartext</td></tr><tr id="4f21afac-2643-47c8-ab0c-2b2bb1ad5d54"><td id="`:@g" class="">IMAPS</td><td id="ireQ" class="">993</td><td id="w&lt;WP" class="">Email (MDA)</td><td id="HNuU" class="">Encrypted</td></tr><tr id="dea7aafa-22e7-40d4-933c-5bf1d32e507f"><td id="`:@g" class="">POP3</td><td id="ireQ" class="">110</td><td id="w&lt;WP" class="">Email (MDA)</td><td id="HNuU" class="">Cleartext</td></tr><tr id="e6533de6-8451-4929-9988-9e44b014723d"><td id="`:@g" class="">POP3S</td><td id="ireQ" class="">995</td><td id="w&lt;WP" class="">Email (MDA)</td><td id="HNuU" class="">Encrypted</td></tr><tr id="6f15d232-f7d9-43a7-aaca-d636416d55b9"><td id="`:@g" class="">SFTP</td><td id="ireQ" class="">22</td><td id="w&lt;WP" class="">File Transfer</td><td id="HNuU" class="">Encrypted</td></tr><tr id="7a1a9706-ec0d-4d31-8756-48f55c15443d"><td id="`:@g" class="">SSH</td><td id="ireQ" class="">22</td><td id="w&lt;WP" class="">Remote Access and File Transfer</td><td id="HNuU" class="">Encrypted</td></tr><tr id="dad6722c-94dc-4aeb-9e44-764082deee65"><td id="`:@g" class="">SMTP</td><td id="ireQ" class="">25</td><td id="w&lt;WP" class="">Email (MTA)</td><td id="HNuU" class="">Cleartext</td></tr><tr id="0d58d6c8-4c93-491f-918c-6a8b65208f28"><td id="`:@g" class="">SMTPS</td><td id="ireQ" class="">465</td><td id="w&lt;WP" class="">Email (MTA)</td><td id="HNuU" class="">Encrypted</td></tr><tr id="0bef1546-9ae6-47bc-9210-2c080a41b8b5"><td id="`:@g" class="">Telnet</td><td id="ireQ" class="">23</td><td id="w&lt;WP" class="">Remote Access</td><td id="HNuU" class="">Cleartext</td></tr></tbody></table><p id="c9abfa4c-04e8-4da4-b929-294ad8eee7c9" class="">We can connect all above via <code>telnet</code> tool except <strong>FTP,</strong></p><p id="dab1bc3a-483d-4cfd-b40c-fa8038151438" class="">We connect to FTP as a client via: <code>ftp</code>&gt; | Some FTP servers: <a href="https://security.appspot.com/vsftpd.html">vsftpd</a>,<a href="https://security.appspot.com/vsftpd.html"> </a><a href="http://www.proftpd.org/">ProFTPD</a>,<a href="http://www.proftpd.org/"> </a><a href="https://www.uftpserver.com/">uFTP</a>.</p><p id="6073cf93-025a-4d29-945c-7b601142b1e1" class="">To use HTTP in telnet connection we type:</p><pre id="22cdbf81-e45a-494e-978e-010d14139eb7" class="code"><code>GET /index.html HTTP/1.1
+host: telnet
+</code></pre><p id="1e98caa6-46a7-497b-81c4-81dc532927e3" class="">Hydra remains a very efficient tool that you can launch from the terminal to try the different passwords. We summarize its main options in the following table.</p><table id="62493fb8-32ce-494b-8d18-4bbfbb977bc1" class="simple-table"><tbody><tr id="18bee667-f178-4b22-90ff-84c54e99377c"><td id="Gxla" class="">Option</td><td id="zNcB" class="" style="width:413px">Explanation</td></tr><tr id="32a80837-4b78-435e-ac8b-dc12fcd41186"><td id="Gxla" class=""><code>-l username</code></td><td id="zNcB" class="" style="width:413px">Provide the login name</td></tr><tr id="095caf83-2d43-4fd9-82b8-6157aa1c77ba"><td id="Gxla" class=""><code>-P WordList.txt</code></td><td id="zNcB" class="" style="width:413px">Specify the password list to use</td></tr><tr id="cc3f13af-709d-404f-ad0a-587efbe2aca4"><td id="Gxla" class=""><code>server service</code></td><td id="zNcB" class="" style="width:413px">Set the server address and service to attack</td></tr><tr id="d8abbfe7-b575-460b-a111-da00ffbd0941"><td id="Gxla" class=""><code>-s PORT</code></td><td id="zNcB" class="" style="width:413px">Use in case of non-default service port number</td></tr><tr id="35a3fba2-407d-49ee-8df1-c3bdb1519086"><td id="Gxla" class=""><code>-V</code> or <code>-vV</code></td><td id="zNcB" class="" style="width:413px">Show the username and password combinations being tried</td></tr><tr id="13addb40-0f2a-4e0f-a715-229b57bb584f"><td id="Gxla" class=""><code>-d</code></td><td id="zNcB" class="" style="width:413px">Display debugging output if the verbose output is not helping</td></tr></tbody></table><p id="06ea0560-ec2c-42ac-adf6-130571c55622" class="">
+</p><div><p id="a598e6c4-2e48-44fe-b094-bafc82298545" class="">
+</p><h3 id="09b6c3d8-4ee1-4ee2-bc9a-9331731e6277" class=""><a href="https://tryhackme.com/p/Ponexen"><mark class="highlight-purple">By</mark></a><a href="https://tryhackme.com/p/Ponexen">|</a><mark class="highlight-purple"> </mark> 🇵🇸 <a href="https://www.notion.so/Try-Hack-Me-7b33b0000bea4464bae0ccb3020f8057"><strong><mark class="highlight-red"><em>Mohanad Ehab Badra</em></mark></strong></a><strong><mark class="highlight-red"><em> </em></mark></strong>☪️💚</h3><p id="2a3ed132-9890-4991-9e9a-53a0c34169bb" class="">
+</p><figure id="6e610d73-f587-45fd-8ff4-37f3ab455b7c"><div class="source"><a href="https://embeds.simple.ink/custom/tryhackme-badge-1675721836">https://embeds.simple.ink/custom/tryhackme-badge-1675721836</a></div></figure></div></div></article></body></html>
