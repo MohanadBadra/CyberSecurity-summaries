@@ -6,6 +6,6 @@ This pages are written by Notion and then export as .HTML
 <a href="http://example.com">Example.com</a>
 
 
-<h3>My TryHackMe Profile/</h3>
-<h4><a "https://tryhackme.com/p/Ponexen">Ponexen</a></h4>
+<h3>My TryHackMe Profile:</h3>
+<a "https://tryhackme.com/p/Ponexen">Ponexen</a>
 <img src="https://tryhackme-badges.s3.amazonaws.com/Ponexen.png" alt="TryHackMe">
