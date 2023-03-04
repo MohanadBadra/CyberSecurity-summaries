@@ -6,4 +6,4 @@ This pages are written by Notion and then export as .HTML
 <a href="http://example.com">Example.com</a>
 
 
-<script></script>
+<img src="https://tryhackme-badges.s3.amazonaws.com/Ponexen.png" alt="TryHackMe">
