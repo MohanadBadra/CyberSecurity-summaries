@@ -7,5 +7,5 @@ This pages are written by Notion and then export as .HTML
 
 
 <h3>My TryHackMe Profile:</h3>
+\n
 <a href="https://tryhackme.com/p/Ponexen"><img src="https://tryhackme-badges.s3.amazonaws.com/Ponexen.png" alt="TryHackMe"></a>
-<img src="https://tryhackme-badges.s3.amazonaws.com/Ponexen.png" alt="TryHackMe">
